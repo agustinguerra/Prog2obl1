@@ -1,6 +1,6 @@
 package prog2;
 
-public class Persona {
+public abstract class Persona {
 
     private String nombre;
     private int edad;
