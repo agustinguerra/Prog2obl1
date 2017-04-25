@@ -1,6 +1,4 @@
-
 package prog2;
-
 
 public class Tablero {
 
@@ -14,6 +12,8 @@ public class Tablero {
         return matriz;
     }
 
+    ///LALALLALALAd
+    //d
     public void setMatriz(int[][] matriz) {
         this.matriz = matriz;
     }
