@@ -1,4 +1,4 @@
-package prog2;
+package Obligatorio1;
 
 public class Tablero {
 
