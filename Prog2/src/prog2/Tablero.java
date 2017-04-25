@@ -12,8 +12,6 @@ public class Tablero {
         return matriz;
     }
 
-    ///LALALLALALAd
-    //d
     public void setMatriz(int[][] matriz) {
         this.matriz = matriz;
     }
