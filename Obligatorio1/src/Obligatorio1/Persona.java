@@ -29,12 +29,12 @@ public abstract class Persona {
         this.edad = edad;
     }
 
-    //CONSTRUCTOR VACIO DE LA CLASE PERSONA.
+    //CONSTRUCTOR VACIO DE LA CLASE PERSONA
     public Persona() {
 
     }
 
-    //METODO TO STRING DE LA CLASE PERSONA.
+    //METODO TO STRING DE LA CLASE PERSONA
     @Override
     public String toString() {
         return "nombre=" + nombre + ", edad=" + edad + '}';
