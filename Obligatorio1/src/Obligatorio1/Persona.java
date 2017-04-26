@@ -35,7 +35,6 @@ public abstract class Persona {
     }
 
     //METODO TO STRING DE LA CLASE PERSONA.
-
     @Override
     public String toString() {
         return "nombre=" + nombre + ", edad=" + edad + '}';
