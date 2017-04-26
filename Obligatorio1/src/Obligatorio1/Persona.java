@@ -35,8 +35,10 @@ public abstract class Persona {
     }
 
     //METODO TO STRING DE LA CLASE PERSONA.
+
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + ", edad=" + edad + '}' + Jugador.class.toString();
+        return "nombre=" + nombre + ", edad=" + edad + '}';
     }
+    
 }
