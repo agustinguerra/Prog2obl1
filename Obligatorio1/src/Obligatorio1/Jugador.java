@@ -22,6 +22,6 @@ public class Jugador extends Persona {
 
     @Override
     public String toString() {
-        return "Jugador{" + "alias=" + alias + '}';
+        return "Jugador{" + "alias=" + alias + '}' + super.toString();
     }
 }
