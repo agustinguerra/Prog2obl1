@@ -1,18 +1,13 @@
-
 package Obligatorio1;
 
-
 public class Ficha {
-    private int color;
-
-
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_RED = "\u001B[31m";
-
     
-    public Ficha() {
-    }
+    //VARIABLES PRIVADAS DE LA CLASE FICHA
+    private int color;
+    private int columna;
+    private int fila;
 
+    //METODOS DE ACCESO Y MODIFICACION DE LA CLASE FICHA
     public int getColor() {
         return color;
     }
@@ -21,28 +16,36 @@ public class Ficha {
         this.color = color;
     }
 
-    public String pintar(int color) {
-        String ficha = "";
-        switch (color) {
-            case 2:
-                ficha = ANSI_BLUE + "Ê˜";
-                break;
-            case 1:
-                ficha = ANSI_RED + "Ê˜";
-                break;
-            case 0:
-                ficha = " ";
-                break;
-            default:
-                break;
-        }
-        return ficha;
+    public int getColumna() {
+        return columna;
     }
-    
-//    @Override
-//    public int compareTo(Ficha f) {
-//        return (this.getColor() - f.getColor());
-//    }
-    
-    
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    //CONSTRUCTOR CON PARAMETROS DE LA CLASE FICHA
+    public Ficha(int color, int columna, int fila) {
+        this.color = color;
+        this.columna = columna;
+        this.fila = fila;
+    }
+
+    //CONSTRUCTOR VACIO DE LA CLASE FICHA
+    public Ficha() {
+    }
+
+    //METODO TO STRING DE LA CLASE FICHA
+    @Override
+    public String toString() {
+        return "Ficha{" + "color=" + color + ", columna=" + columna + ", fila=" + fila + '}';
+    }    
 }
