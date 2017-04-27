@@ -1,11 +1,10 @@
 package Obligatorio1;
 
 public class Ficha {
-    
+
     //VARIABLES PRIVADAS DE LA CLASE FICHA
     private int color;
-    private int columna;
-    private int fila;
+    private int valor;
 
     //METODOS DE ACCESO Y MODIFICACION DE LA CLASE FICHA
     public int getColor() {
@@ -16,36 +15,14 @@ public class Ficha {
         this.color = color;
     }
 
-    public int getColumna() {
-        return columna;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
-    }
-
-    public int getFila() {
-        return fila;
-    }
-
-    public void setFila(int fila) {
-        this.fila = fila;
-    }
-
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE FICHA
-    public Ficha(int color, int columna, int fila) {
+    public Ficha(int color, int valor) {
         this.color = color;
-        this.columna = columna;
-        this.fila = fila;
+        this.valor = valor;
     }
 
     //CONSTRUCTOR VACIO DE LA CLASE FICHA
     public Ficha() {
+        
     }
-
-    //METODO TO STRING DE LA CLASE FICHA
-    @Override
-    public String toString() {
-        return "Ficha{" + "color=" + color + ", columna=" + columna + ", fila=" + fila + '}';
-    }    
 }

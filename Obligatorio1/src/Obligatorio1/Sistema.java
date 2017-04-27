@@ -1,8 +1,9 @@
 package Obligatorio1;
+
 import java.util.ArrayList;
 
 public class Sistema {
-    
+
     //VARIABLES PRIVADAS DE LA CLASE SISTEMA
     private Partida partida;
     private Interfaz interfaz;
@@ -32,7 +33,7 @@ public class Sistema {
     public void setListaJugadores(ArrayList<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
     }
-    
+
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE SISTEMA
     public Sistema(Partida partida, Interfaz interfaz, ArrayList<Jugador> listaJugadores) {
         this.partida = partida;
@@ -42,11 +43,6 @@ public class Sistema {
 
     //CONSTRUCTOR VACIO DE LA CLASE SISTEMA
     public Sistema() {
-    }
 
-    //METODO TO STRING DE LA CLASE SISTEMA
-    @Override
-    public String toString() {
-        return "Sistema{" + "partida=" + partida + ", interfaz=" + interfaz + ", listaJugadores=" + listaJugadores + '}';
     }
 }

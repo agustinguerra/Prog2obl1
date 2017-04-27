@@ -4,10 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
-    
+
     public static void main(String[] args) {
-        
-    }   
+        Sistema sUno = new Sistema();
+    }
 
     //METODO ESTATICO QUE PIDE UN DATO DE TIPO STRING Y LO DEVUELVE.
     public static String pidoDatoString(String msg) {
@@ -40,4 +40,19 @@ public class Program {
         }
         return x;
     }
+
+    public static void juego() {
+        int jugadorUnoFichas;
+        jugadorUnoFichas = 25;
+        int jugadorDosFichas;
+        jugadorUnoFichas = 25;
+        while (true) {
+            
+            
+            
+            
+
+        }
+    }
+    
 }
