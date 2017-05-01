@@ -1,7 +1,5 @@
 package Obligatorio1;
 
-import java.util.Arrays;
-
 public class Tablero {
 
     //VARIABLES PRIVADAS DE LA CLASE TABLERO
@@ -17,11 +15,17 @@ public class Tablero {
     }
 
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE TABLERO
-    public Tablero(Ficha[][] matriz, Ficha ficha) {
+    public Tablero(Ficha[][] matriz) {
         this.matriz = matriz;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                matriz[i][j] = new Ficha(0,0);
+            }
+        }
     }
 
     //CONSTRUCTOR VACIO DE LA CLASE TABLERO
     public Tablero() {
+        
     }
 }

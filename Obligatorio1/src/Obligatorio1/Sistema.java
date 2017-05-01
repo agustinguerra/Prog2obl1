@@ -1,5 +1,7 @@
 package Obligatorio1;
 
+import static Obligatorio1.Program.pidoDatoIntPositivo;
+import static Obligatorio1.Program.pidoDatoString;
 import java.util.ArrayList;
 
 public class Sistema {
@@ -43,6 +45,23 @@ public class Sistema {
 
     //CONSTRUCTOR VACIO DE LA CLASE SISTEMA
     public Sistema() {
-
+        Interfaz inter = new Interfaz();
+        this.interfaz = inter;
+        ArrayList listaJugadores1 = new ArrayList<>();
+        this.listaJugadores = listaJugadores1;
+    }
+    
+    public void registroJugador() {
+        Jugador jugador = new Jugador();
+        jugador.setEdad(pidoDatoIntPositivo("Ingrese la edad del jugador: ", 0, Integer.MAX_VALUE, 0));
+        jugador.setNombre(pidoDatoString("Ingrese el nombre del jugador: ",""));
+        jugador.setJuegosGanados(0);
+        jugador.setAlias(pidoDatoString("Ingrese el alias del jugador (DEBE SER UNICO, SE COMPROBARA EXISTENCIA REPETIDA). ",""));
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            if (jugador.getAlias().equals(listaJugadores.get(i).getAlias())) {
+                jugador.setAlias(pidoDatoString("Ingrese el alias del jugador: ", jugador.getAlias()));
+            }
+        }
+        listaJugadores.add(jugador);
     }
 }
