@@ -1,6 +1,6 @@
 package Obligatorio1;
 
-public class Jugador extends Persona {
+public class Jugador extends Persona implements Comparable<Jugador>{
 
     //VARIABLES PRIVADAS DE LA CLASE JUGADOR QUE ES EL HIJO DE PERSONA
     private String alias;
@@ -38,4 +38,17 @@ public class Jugador extends Persona {
     public String toString() {
         return "Jugador{" + "alias=" + alias + '}' + super.toString();
     }
+       
+    //METODO DE LA CLASE INSPECCION QUE ES USADO EN COLLECTIONS.SORT PARA ORDENAR LA LISTA POR DIA Y MES.
+    @Override
+    public int compareTo(Jugador i) {
+        return (i.getJuegosGanados() - this.getJuegosGanados());
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        Jugador jugador = (Jugador)o;
+        return (this.getAlias().equals(jugador.getAlias()));
+    }
+    
 }

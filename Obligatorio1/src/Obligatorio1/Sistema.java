@@ -3,12 +3,12 @@ package Obligatorio1;
 import static Obligatorio1.Program.pidoDatoIntPositivo;
 import static Obligatorio1.Program.pidoDatoString;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sistema {
 
     //VARIABLES PRIVADAS DE LA CLASE SISTEMA
     private Partida partida;
-    private Interfaz interfaz;
     private ArrayList<Jugador> listaJugadores;
 
     //METODOS DE ACCESO Y MODIFICACION DE LA CLASE SISTEMA
@@ -20,14 +20,6 @@ public class Sistema {
         this.partida = partida;
     }
 
-    public Interfaz getInterfaz() {
-        return interfaz;
-    }
-
-    public void setInterfaz(Interfaz interfaz) {
-        this.interfaz = interfaz;
-    }
-
     public ArrayList<Jugador> getListaJugadores() {
         return listaJugadores;
     }
@@ -37,16 +29,13 @@ public class Sistema {
     }
 
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE SISTEMA
-    public Sistema(Partida partida, Interfaz interfaz, ArrayList<Jugador> listaJugadores) {
+    public Sistema(Partida partida, ArrayList<Jugador> listaJugadores) {
         this.partida = partida;
-        this.interfaz = interfaz;
         this.listaJugadores = listaJugadores;
     }
 
     //CONSTRUCTOR VACIO DE LA CLASE SISTEMA
     public Sistema() {
-        Interfaz inter = new Interfaz();
-        this.interfaz = inter;
         ArrayList listaJugadores1 = new ArrayList<>();
         this.listaJugadores = listaJugadores1;
     }
@@ -64,4 +53,24 @@ public class Sistema {
         }
         listaJugadores.add(jugador);
     }
+    
+    public ArrayList<Jugador> ranking() {
+        Collections.sort(this.getListaJugadores());
+        return this.getListaJugadores();
+    }
+    
+    public void jugarEntreJugadores() {
+        int jugadorUnoFichas;
+        jugadorUnoFichas = 25;
+        int jugadorDosFichas;
+        jugadorUnoFichas = 25;
+        boolean cond = false;
+        while (!cond) {
+
+        }
+    }
+    
+    public void jugarContraPC() {
+        
+    } 
 }
