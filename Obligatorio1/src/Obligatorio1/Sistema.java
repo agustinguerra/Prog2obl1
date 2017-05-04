@@ -36,8 +36,7 @@ public class Sistema {
 
     //CONSTRUCTOR VACIO DE LA CLASE SISTEMA
     public Sistema() {
-        ArrayList listaJugadores1 = new ArrayList<>();
-        this.listaJugadores = listaJugadores1;
+        this.listaJugadores = new ArrayList<>();       
     }
     
     public void registroJugador() {

@@ -41,6 +41,7 @@ public class Partida {
 
     //CONSTRUCTOR VACIO DE LA CLASE TABLERO
     public Partida() {
+        this.tablero = new Tablero();
     }
 
     //METODO TO STRING DE LA CLASE TABLERO
