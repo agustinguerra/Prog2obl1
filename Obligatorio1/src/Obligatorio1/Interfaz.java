@@ -38,7 +38,7 @@ public class Interfaz {
         }
         return fichaParaImprimir;
     } 
-//ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA.
+//ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA. NO ESTA DIBUJANDO LA ULTIMA LINEA, REVISAR LUEGO
     public void dibujarTablero(){
         int dimensiones = 6;
         for (int row = 0; row < dimensiones; row++)
@@ -85,7 +85,7 @@ public class Interfaz {
                     break;
                 case 4:
                     System.out.println("Ranking de jugadores por partidas ganadas.");
-                    System.out.println(sistema.ranking());
+                    sistema.ranking(); // METODO CAMBIADO PARA QUE DIRECTAMENTE SE IMPRIMA DEL OTRO LADO.
                     break;
                 case 5:
                     cond = true;
