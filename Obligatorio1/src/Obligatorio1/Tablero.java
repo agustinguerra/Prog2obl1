@@ -37,8 +37,5 @@ public class Tablero {
             }
         }
     }
-    //METODO QUE CALCULA EL PUNTAJE DE UN JUGADOR. AL IGUAL QUE HICIMOS CON LAS FICHAS, 1 CORRESPONDE A ROJO (JUGADOR UNO) Y 2 A AZUL (JUGADOR DOS)
-    public int calcularPuntaje(int jugador){
-        return 0;
-    }
+
 }
