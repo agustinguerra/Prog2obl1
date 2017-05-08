@@ -23,14 +23,10 @@ public class Interfaz {
 
     }
 
-    public void registrarJugador() {
-        sistema.registroJugador();
-    }
-
     public int cantidadJugadores() {
         return sistema.getListaJugadores().size();
     }
-//LE DAS LA FICHA, Y TE DEVUELVE LA STRING CON EL VALOR YA PINTADO DEL COLOR CORRECTO
+    //LE DAS LA FICHA, Y TE DEVUELVE LA STRING CON EL VALOR YA PINTADO DEL COLOR CORRECTO
     public String stringFicha(Ficha fich){
         String fichaParaImprimir=" ";
         if (fich.getValor()>0){
@@ -38,7 +34,7 @@ public class Interfaz {
         }
         return fichaParaImprimir;
     } 
-//ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA. NO ESTA DIBUJANDO LA ULTIMA LINEA, REVISAR LUEGO
+    //ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA. NO ESTA DIBUJANDO LA ULTIMA LINEA, REVISAR LUEGO
     public void dibujarTablero(){
         int dimensiones = 6;
         for (int row = 0; row < dimensiones; row++)
@@ -67,7 +63,7 @@ public class Interfaz {
             int menu = pidoDatoIntPositivo("Ingrese la opcion del menu", 0, 6, -1);
             switch (menu) {
                 case 1:
-                    registrarJugador();
+                    sistema.registroJugador();
                     break;
                 case 2:
                     if (cantidadJugadores() > 1) {

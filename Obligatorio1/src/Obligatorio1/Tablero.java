@@ -23,7 +23,7 @@ public class Tablero {
         this.matriz = matriz;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                matriz[i][j] = new Ficha(0,0);
+                matriz[i][j] = new Ficha(Ficha.ANSI_BLACK,0);
             }
         }
     }
@@ -33,7 +33,7 @@ public class Tablero {
         this.matriz = new Ficha[6][6];
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                matriz[i][j] = new Ficha(0,0);
+                matriz[i][j] = new Ficha(Ficha.ANSI_BLACK,0);
             }
         }
     }

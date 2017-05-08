@@ -67,7 +67,56 @@ public class Reglas {
     }
     
     public boolean tieneAdyacente(int i,int j, Tablero tablero){
-        boolean devuelve=false;
+        boolean devuelve= false;
         return devuelve;
+    }
+    
+    public boolean hayFicha(int i, int j, Tablero tablero) { //CHEQUEA SI YA HAY UNA FICHA EN EL LUGAR O NO
+        boolean devolver = true;
+        return devolver;
+    }
+    
+    public boolean seFormoEsquina(int i, int j, Tablero tablero) { //CHEQUEA SI SE FORMARON O NO ESQUINAS AL MOMENTO DE PONER LA FICHA
+        //PODEMOS HACER ESTO, QUE TE PARECE?
+        //SI TE GUSTA PODEMOS HACER LO MISMO EN EL METODO DE ARRIBA
+        boolean cond = ((i > 0 && j > 0) && (i < 5 && j < 5));
+        if (cond) {
+            //INTERNO DEL TABLERO
+        } else if (!cond) {
+            //EXTERNO DEL TABLERO
+            switch (i) {
+                case 0:
+                    switch (j) {
+                        case 0:
+
+                            break;
+                        case 5:
+
+                            break;
+                    }
+                    break;
+                case 5:
+                    switch (j) {
+                        case 0:
+
+                            break;
+                        case 5:
+
+                            break;
+                    }
+            }
+        }
+
+        boolean devolver = true;
+        return devolver;
+    }
+    
+    public int cantidadFichasAPoner(int i,int j,Tablero tablero) { //DEVUELVE LA CANTIDAD
+        int fichasAPoner=0;
+        return fichasAPoner;
+    }
+    
+    public void ponerFichasEsquinas(int i,int j,Tablero tablero) { // LUEGO DE CHEQUEAR QUE AL PONER LA FICHA SE FORMA ESQUINA, ESTE METODO SUMA LAS FICHAS
+        
     }
 }
