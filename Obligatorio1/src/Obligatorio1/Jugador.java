@@ -1,8 +1,10 @@
 package Obligatorio1;
 
-public class Jugador extends Persona implements Comparable<Jugador>{
+public class Jugador implements Comparable<Jugador>{
 
     //VARIABLES PRIVADAS DE LA CLASE JUGADOR QUE ES EL HIJO DE PERSONA
+    private String nombre;
+    private int edad;
     private String alias;
     private int juegosGanados;
 
@@ -25,7 +27,10 @@ public class Jugador extends Persona implements Comparable<Jugador>{
     
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE JUGADOR USANDO SUPER DE PERSONA    
     public Jugador(String alias, String nombre, int edad, int juegosGanados) {
-        super(nombre, edad);
+        this.nombre = nombre;
+        this.edad = edad;
+        this.alias = alias;
+        this.juegosGanados = 0;
     }
 
     //CONSTRUCTOR VACIO DE LA CLASE JUGADOR
@@ -33,10 +38,26 @@ public class Jugador extends Persona implements Comparable<Jugador>{
         this.juegosGanados=0;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
     //METODO TO STRING DE LA CLASE JUGADOR
     @Override
     public String toString() {
-        return "Alias = " + alias + ' ' + super.toString();
+        return "Alias = " + alias + ", " + "Nombre = " + nombre + ", Edad = " + edad;
     }
        
     //METODO DE LA CLASE INSPECCION QUE ES USADO EN COLLECTIONS.SORT PARA ORDENAR LA LISTA POR DIA Y MES.

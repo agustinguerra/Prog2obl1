@@ -113,7 +113,7 @@ public class Reglas {
         return devuelve;
     }
     
-    public boolean hayFicha(int i, int j, Tablero tablero) { //DEVUELVE TRUE SI HAY UNA FICHA EN EL TABLERO
+    public boolean hayFicha(int i, int j, Tablero tablero) { //DEVUELVE TRUE SI HAY UNA FICHA EN EL TABLERO EN DETERMINADA POSICION
         boolean devolver = false;
         if (tablero.getFichaDeTablero(i, j).getValor()>0){
             devolver=true;
