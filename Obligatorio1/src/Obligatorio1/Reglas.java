@@ -66,19 +66,65 @@ public class Reglas {
         return puntaje;
     }
     
-    public boolean tieneAdyacente(int i,int j, Tablero tablero){
+
+    
+    public boolean tieneAdyacente(int i,int j, Tablero tablero){ //DEVUELVE TRUE SI TIENE FICHA ADYACENTE
         boolean devuelve= false;
+        if (i>0){
+            if (tablero.getFichaDeTablero(i-1,j).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (i>0 && j<5){
+            if (tablero.getFichaDeTablero(i-1,j+1).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (j<5){
+            if (tablero.getFichaDeTablero(i,j+1).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (i<5 && j<5){
+            if (tablero.getFichaDeTablero(i+1,j+1).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (i>5){
+            if (tablero.getFichaDeTablero(i+1,j).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (i>5 && j>0){
+            if (tablero.getFichaDeTablero(i+1,j-1).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (j>0){
+            if (tablero.getFichaDeTablero(i,j-1).getValor()>0){
+                devuelve=true;
+            }
+        }
+        if (i>0 && j>0){
+            if (tablero.getFichaDeTablero(i-1,j-1).getValor()>0){
+                devuelve=true;
+            }
+        }        
         return devuelve;
     }
     
-    public boolean hayFicha(int i, int j, Tablero tablero) { //CHEQUEA SI YA HAY UNA FICHA EN EL LUGAR O NO
-        boolean devolver = true;
+    public boolean hayFicha(int i, int j, Tablero tablero) { //DEVUELVE TRUE SI HAY UNA FICHA EN EL TABLERO
+        boolean devolver = false;
+        if (tablero.getFichaDeTablero(i, j).getValor()>0){
+            devolver=true;
+        }
         return devolver;
     }
     
     public boolean seFormoEsquina(int i, int j, Tablero tablero) { //CHEQUEA SI SE FORMARON O NO ESQUINAS AL MOMENTO DE PONER LA FICHA
         //PODEMOS HACER ESTO, QUE TE PARECE?
         //SI TE GUSTA PODEMOS HACER LO MISMO EN EL METODO DE ARRIBA
+        //HICE LOS METODOS DE ARRIBA QUE FALTABAN, ESTE QUE ARRANCASTE VOS ENCARALO VOS, Y DESPUES LOS DOS QUE QUEDAN VEMOS COMO LO DIVIDIMOS
         boolean cond = ((i > 0 && j > 0) && (i < 5 && j < 5));
         if (cond) {
             //INTERNO DEL TABLERO

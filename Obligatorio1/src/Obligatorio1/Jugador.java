@@ -30,13 +30,13 @@ public class Jugador extends Persona implements Comparable<Jugador>{
 
     //CONSTRUCTOR VACIO DE LA CLASE JUGADOR
     public Jugador() {
-
+        this.juegosGanados=0;
     }
 
     //METODO TO STRING DE LA CLASE JUGADOR
     @Override
     public String toString() {
-        return "Jugador{" + "alias=" + alias + '}' + super.toString();
+        return "Alias = " + alias + ' ' + super.toString();
     }
        
     //METODO DE LA CLASE INSPECCION QUE ES USADO EN COLLECTIONS.SORT PARA ORDENAR LA LISTA POR DIA Y MES.

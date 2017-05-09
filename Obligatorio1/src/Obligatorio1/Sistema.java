@@ -10,6 +10,7 @@ public class Sistema {
     //VARIABLES PRIVADAS DE LA CLASE SISTEMA
     private Partida partida;
     private ArrayList<Jugador> listaJugadores;
+    private Reglas libroDeReglas;
 
     //METODOS DE ACCESO Y MODIFICACION DE LA CLASE SISTEMA
     public Partida getPartida() {
@@ -36,7 +37,8 @@ public class Sistema {
 
     //CONSTRUCTOR VACIO DE LA CLASE SISTEMA
     public Sistema() {
-        this.listaJugadores = new ArrayList<>();       
+        this.listaJugadores = new ArrayList<>();
+        this.libroDeReglas = new Reglas();
     }
     
     public void registroJugador() {
@@ -93,6 +95,16 @@ public class Sistema {
                 turnoDe=!turnoDe; //SI LA PARTIDA NO TERMINO, CAMBIO EL TURNO AL OTRO JUGADOR
             }
         }
+        //UNA VEZ QUE SE TERMINO LA PARTIDA, ACTUALIZO EL RANKING, ES DECIR LE SUMO UNA PARTIDA GANADA AL QUE GANO
+        //SI EMPATAN NO LE SUMO NADA A NADIE
+        if (libroDeReglas.calcularPuntaje(1,this.partida.getTablero())>libroDeReglas.calcularPuntaje(2,this.partida.getTablero())){
+            int jGanados=this.partida.getJugadorUno().getJuegosGanados();
+            this.partida.getJugadorUno().setJuegosGanados(jGanados+1);
+        }
+        if (libroDeReglas.calcularPuntaje(1,this.partida.getTablero())<libroDeReglas.calcularPuntaje(2,this.partida.getTablero())){
+            int jGanados=this.partida.getJugadorDos().getJuegosGanados();
+            this.partida.getJugadorDos().setJuegosGanados(jGanados+1);
+        }
     }
     
     public void jugarContraPC() {
@@ -123,5 +135,6 @@ public class Sistema {
                 turnoDe=!turnoDe; //SI LA PARTIDA NO TERMINO, CAMBIO EL TURNO AL OTRO JUGADOR
             }
         }
+        //VAMOS A SUMAR UNA VICTORIA SI EL JUGADOR LE GANA A LA MAQUINA?
     } 
 }
