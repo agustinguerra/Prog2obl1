@@ -43,7 +43,7 @@ public class Interfaz {
             System.out.println("-------------------------");
             for (int column = 0; column < dimensiones; column++)
             {
-                System.out.print("| " + stringFicha((sistema.getPartida().getTablero().getFichaDeTablero(row,column))) + " ");
+                System.out.print("| " + stringFicha((sistema.getPartida().getTablero().getFicha(row,column))) + " ");
             }       
             System.out.print("|");
         }

@@ -43,10 +43,4 @@ public class Partida {
     public Partida() {
         this.tablero = new Tablero();
     }
-
-    //METODO TO STRING DE LA CLASE TABLERO
-    @Override
-    public String toString() {
-        return "Partida{" + "jugadorUno=" + jugadorUno + ", jugadorDos=" + jugadorDos + ", tablero=" + tablero + '}';
-    }
 }

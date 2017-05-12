@@ -2,7 +2,7 @@ package Obligatorio1;
 
 public class Jugador implements Comparable<Jugador>{
 
-    //VARIABLES PRIVADAS DE LA CLASE JUGADOR QUE ES EL HIJO DE PERSONA
+    //VARIABLES PRIVADAS DE LA CLASE JUGADOR
     private String nombre;
     private int edad;
     private String alias;
@@ -25,19 +25,6 @@ public class Jugador implements Comparable<Jugador>{
         this.juegosGanados = juegosGanados;
     }
     
-    //CONSTRUCTOR CON PARAMETROS DE LA CLASE JUGADOR USANDO SUPER DE PERSONA    
-    public Jugador(String alias, String nombre, int edad, int juegosGanados) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.alias = alias;
-        this.juegosGanados = 0;
-    }
-
-    //CONSTRUCTOR VACIO DE LA CLASE JUGADOR
-    public Jugador() {
-        this.juegosGanados=0;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -53,6 +40,19 @@ public class Jugador implements Comparable<Jugador>{
     public void setEdad(int edad) {
         this.edad = edad;
     }
+    
+    //CONSTRUCTOR CON PARAMETROS DE LA CLASE JUGADOR USANDO SUPER DE PERSONA    
+    public Jugador(String alias, String nombre, int edad, int juegosGanados) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.alias = alias;
+        this.juegosGanados = 0;
+    }
+
+    //CONSTRUCTOR VACIO DE LA CLASE JUGADOR
+    public Jugador() {
+        this.juegosGanados=0;
+    }
 
     //METODO TO STRING DE LA CLASE JUGADOR
     @Override
@@ -60,12 +60,13 @@ public class Jugador implements Comparable<Jugador>{
         return "Alias = " + alias + ", " + "Nombre = " + nombre + ", Edad = " + edad;
     }
        
-    //METODO DE LA CLASE INSPECCION QUE ES USADO EN COLLECTIONS.SORT PARA ORDENAR LA LISTA POR DIA Y MES.
+    //METODO QUE ES USADO EN COLLECTIONS.SORT PARA ORDENAR LA LISTA DE JUGADORES POR JUEGOS GANADOS
     @Override
     public int compareTo(Jugador i) {
         return (i.getJuegosGanados() - this.getJuegosGanados());
     }
     
+    //METODO QUE ES USADO PARA VER SI UN JUGADOR VA A TENER EL MISMO ALIAS QUE TODOS LOS QUE ESTAN EN LA LISTA
     @Override
     public boolean equals(Object o) {
         Jugador jugador = (Jugador)o;

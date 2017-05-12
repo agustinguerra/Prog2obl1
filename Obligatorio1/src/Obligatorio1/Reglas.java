@@ -8,36 +8,36 @@ public class Reglas {
         //PRIMERO CHEQUEO QUE ESE CUADRADO SEA POSIBLE DADA LA POSICION DEL TABLERO, Y LUEGO CHEQUEO SI SE FORMA O NO
         boolean devuelve=false;
         if (i+1<6 && j+1<6){
-            if (tablero.getFichaDeTablero(i+1,j+1).getValor()>0){
-                if (tablero.getFichaDeTablero(i,j+1).getValor()>0) {
-                    if (tablero.getFichaDeTablero(i+1,j).getValor()>0) {
+            if (tablero.getFicha(i+1,j+1).getValor()>0){
+                if (tablero.getFicha(i,j+1).getValor()>0) {
+                    if (tablero.getFicha(i+1,j).getValor()>0) {
                         devuelve=true;
                     }
                 }
             }
         }
         if (i-1>-1 && j+1<6){
-            if (tablero.getFichaDeTablero(i-1,j).getValor()>0){
-                if (tablero.getFichaDeTablero(i-1,j+1).getValor()>0) {
-                    if (tablero.getFichaDeTablero(i,j+1).getValor()>0) {
+            if (tablero.getFicha(i-1,j).getValor()>0){
+                if (tablero.getFicha(i-1,j+1).getValor()>0) {
+                    if (tablero.getFicha(i,j+1).getValor()>0) {
                         devuelve=true;
                     }
                 }
             }            
         }
         if (i-1>-1 && j-1<-1){
-            if (tablero.getFichaDeTablero(i-1,j).getValor()>0){
-                if (tablero.getFichaDeTablero(i-1,j-1).getValor()>0) {
-                    if (tablero.getFichaDeTablero(i,j-1).getValor()>0) {
+            if (tablero.getFicha(i-1,j).getValor()>0){
+                if (tablero.getFicha(i-1,j-1).getValor()>0) {
+                    if (tablero.getFicha(i,j-1).getValor()>0) {
                         devuelve=true;
                     }
                 }
             }            
         }
         if (i+1<6 && j-1>-1){
-            if (tablero.getFichaDeTablero(i,j-1).getValor()>0){
-                if (tablero.getFichaDeTablero(i+1,j-1).getValor()>0) {
-                    if (tablero.getFichaDeTablero(i+1,j).getValor()>0) {
+            if (tablero.getFicha(i,j-1).getValor()>0){
+                if (tablero.getFicha(i+1,j-1).getValor()>0) {
+                    if (tablero.getFicha(i+1,j).getValor()>0) {
                         devuelve=true;
                     }
                 }
@@ -58,8 +58,8 @@ public class Reglas {
         }
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if(tablero.getFichaDeTablero(i, j).getValor()>1 && tablero.getFichaDeTablero(i, j).getColor().equals(color)){
-                    puntaje=puntaje+tablero.getFichaDeTablero(i, j).getValor();
+                if(tablero.getFicha(i, j).getValor()>1 && tablero.getFicha(i, j).getColor().equals(color)){
+                    puntaje=puntaje+tablero.getFicha(i, j).getValor();
                 }
             }
         }
@@ -71,42 +71,42 @@ public class Reglas {
     public boolean tieneAdyacente(int i,int j, Tablero tablero){ //DEVUELVE TRUE SI TIENE FICHA ADYACENTE
         boolean devuelve= false;
         if (i>0){
-            if (tablero.getFichaDeTablero(i-1,j).getValor()>0){
+            if (tablero.getFicha(i-1,j).getValor()>0){
                 devuelve=true;
             }
         }
         if (i>0 && j<5){
-            if (tablero.getFichaDeTablero(i-1,j+1).getValor()>0){
+            if (tablero.getFicha(i-1,j+1).getValor()>0){
                 devuelve=true;
             }
         }
         if (j<5){
-            if (tablero.getFichaDeTablero(i,j+1).getValor()>0){
+            if (tablero.getFicha(i,j+1).getValor()>0){
                 devuelve=true;
             }
         }
         if (i<5 && j<5){
-            if (tablero.getFichaDeTablero(i+1,j+1).getValor()>0){
+            if (tablero.getFicha(i+1,j+1).getValor()>0){
                 devuelve=true;
             }
         }
         if (i>5){
-            if (tablero.getFichaDeTablero(i+1,j).getValor()>0){
+            if (tablero.getFicha(i+1,j).getValor()>0){
                 devuelve=true;
             }
         }
         if (i>5 && j>0){
-            if (tablero.getFichaDeTablero(i+1,j-1).getValor()>0){
+            if (tablero.getFicha(i+1,j-1).getValor()>0){
                 devuelve=true;
             }
         }
         if (j>0){
-            if (tablero.getFichaDeTablero(i,j-1).getValor()>0){
+            if (tablero.getFicha(i,j-1).getValor()>0){
                 devuelve=true;
             }
         }
         if (i>0 && j>0){
-            if (tablero.getFichaDeTablero(i-1,j-1).getValor()>0){
+            if (tablero.getFicha(i-1,j-1).getValor()>0){
                 devuelve=true;
             }
         }        
@@ -115,7 +115,7 @@ public class Reglas {
     
     public boolean hayFicha(int i, int j, Tablero tablero) { //DEVUELVE TRUE SI HAY UNA FICHA EN EL TABLERO EN DETERMINADA POSICION
         boolean devolver = false;
-        if (tablero.getFichaDeTablero(i, j).getValor()>0){
+        if (tablero.getFicha(i, j).getValor()>0){
             devolver=true;
         }
         return devolver;
@@ -125,35 +125,141 @@ public class Reglas {
         //PODEMOS HACER ESTO, QUE TE PARECE?
         //SI TE GUSTA PODEMOS HACER LO MISMO EN EL METODO DE ARRIBA
         //HICE LOS METODOS DE ARRIBA QUE FALTABAN, ESTE QUE ARRANCASTE VOS ENCARALO VOS, Y DESPUES LOS DOS QUE QUEDAN VEMOS COMO LO DIVIDIMOS
+        
+        //ESTA CONDICION EVALUA SI ES INTERNO O EXTERNO
         boolean cond = ((i > 0 && j > 0) && (i < 5 && j < 5));
+        
+        //ESTA CONDICION EVALUA SI HAY FICHA EN ESE LUGAR DEL TABLERO
+        boolean cond2 = hayFicha(i, j, tablero);
+        
+        //ESTAS CONDICIONES EVALUAN ARRIBA ABAJO IZQUIEDA Y DERECHA 
+        boolean condArriba = hayFicha(i-1, j, tablero);
+        boolean condAbajo = hayFicha(i+1, j, tablero);
+        boolean condIzquierda = hayFicha(i, j-1, tablero);
+        boolean condDerecha = hayFicha(i, j+1, tablero);
+        
+        //ESTAS CONDICIONES EVALUAN FICHAS EXTERNAS
+        boolean condExternaUno = ((i == 0) & ((j > 0) && (j < 5)));
+        boolean condExternaDos = (i == 5 & ((j > 0) && (j < 5)));
+        boolean condExternaTres = (j == 0 & ((i > 0) && (i < 5)));
+        boolean condExternaCuatro = (j == 5 & ((i > 0) && (i < 5)));
+        
+        boolean devolver = true;
         if (cond) {
             //INTERNO DEL TABLERO
+            if (cond2) {
+                //HAY FICHA EN ESE LUGAR ENTONCES CHEQUEAMOS ARRIBA ABAJO IZQUIERDA DERECHA PORQUE EN INTERNO SIEMPRE VA A HABER PARA CHEQUEAR ESOS 4
+                if (condArriba) {
+                    devolver = true;
+                }
+                if (condAbajo) {
+                    devolver = true;
+                }
+                if (condIzquierda) {
+                    devolver = true;
+                }
+                if (condDerecha) {
+                    devolver = true;
+                }
+            }
         } else if (!cond) {
             //EXTERNO DEL TABLERO
             switch (i) {
                 case 0:
                     switch (j) {
                         case 0:
-
+                            if (cond2) {
+                                if (condDerecha) {
+                                    devolver = true;
+                                }
+                                if (condAbajo) {
+                                    devolver = true;
+                                }
+                            }
                             break;
                         case 5:
-
+                            if (cond2) {
+                                if (condIzquierda) {
+                                    devolver = true;
+                                }
+                                if (condAbajo) {
+                                    devolver = true;
+                                }
+                            }
                             break;
                     }
-                    break;
                 case 5:
                     switch (j) {
                         case 0:
-
+                            if (cond2) {
+                                if (condArriba) {
+                                    devolver = true;
+                                }
+                                if (condDerecha) {
+                                    devolver = true;
+                                }
+                            }
                             break;
                         case 5:
-
+                            if (cond2) {
+                                if (condArriba) {
+                                    devolver = true;
+                                }
+                                if (condIzquierda) {
+                                    devolver = true;
+                                }
+                            }
                             break;
                     }
             }
+            
+            if (cond2) {
+                if (condExternaUno) {
+                    if (condAbajo) {
+                        devolver = true;
+                    }
+                    if (condDerecha) {
+                        devolver = true;
+                    }
+                    if (condIzquierda) {
+                        devolver = true;
+                    }
+                }
+                if (condExternaDos) {
+                    if (condArriba) {
+                        devolver = true;
+                    }
+                    if (condDerecha) {
+                        devolver = true;
+                    }
+                    if (condIzquierda) {
+                        devolver = true;
+                    }
+                }
+                if (condExternaTres) {
+                    if (condArriba) {
+                        devolver = true;
+                    }
+                    if (condDerecha) {
+                        devolver = true;
+                    }
+                    if (condAbajo) {
+                        devolver = true;
+                    }
+                }
+                if (condExternaCuatro) {
+                    if (condArriba) {
+                        devolver = true;
+                    }
+                    if (condAbajo) {
+                        devolver = true;
+                    }
+                    if (condIzquierda) {
+                        devolver = true;
+                    }
+                }
+            }
         }
-
-        boolean devolver = true;
         return devolver;
     }
     

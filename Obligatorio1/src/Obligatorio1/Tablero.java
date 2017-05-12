@@ -2,7 +2,7 @@ package Obligatorio1;
 
 public class Tablero {
 
-    //VARIABLES PRIVADAS DE LA CLASE TABLERO
+    //VARIABLE PRIVADA DE LA CLASE TABLERO
     private Ficha[][] matriz;
 
     //METODOS DE ACCESO Y MODIFICACION DE LA CLASE TABLERO
@@ -14,10 +14,11 @@ public class Tablero {
         this.matriz = matriz;
     }
 
-    public Ficha getFichaDeTablero(int i,int j){
+    //METODO QUE PERMITE OBETENER UNA FICHA DEL TABLERO
+    public Ficha getFicha(int i,int j){
         return this.matriz[i][j];
     }
-    
+        
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE TABLERO
     public Tablero(Ficha[][] matriz) {
         this.matriz = matriz;
