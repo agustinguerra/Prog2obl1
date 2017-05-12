@@ -42,4 +42,14 @@ public class Program {
         }
         return x;
     }
+    
+    public static String pidoDatosParaMovimientoValido (String msg) {
+        System.out.println(msg);
+        String x = (new Scanner(System.in)).nextLine();
+        while ((x.length() != 2) || (x.charAt(0)>='F' || x.charAt(0)<='A') || (Character.getNumericValue(x.charAt(1))>=6 || Character.getNumericValue(x.charAt(1))<=1)){
+            System.out.println(msg);
+            x = (new Scanner(System.in)).nextLine();
+        }
+        return x;        
+    }
 }

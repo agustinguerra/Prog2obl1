@@ -2,6 +2,7 @@ package Obligatorio1;
 
 import static Obligatorio1.Program.pidoDatoIntPositivo;
 import static Obligatorio1.Program.pidoDatoString;
+import static Obligatorio1.Program.pidoDatosParaMovimientoValido;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -54,6 +55,40 @@ public class Sistema {
         }
         listaJugadores.add(jugador);
     }
+
+    public int primerCoordenadaMovimiento(String x){ //EXTRAIGO LA PRIMER COORDENADA DE LA FICHA A PONER
+        int devolver=0;
+        switch (x.charAt(0)) {
+            case 'A':
+                devolver=0;
+                break;
+            case 'B':
+                devolver=1;
+                break;
+            case 'C':
+                devolver=2;
+                break;
+            case 'D':
+                devolver=3;
+                break;
+            case 'E':
+                devolver=4;
+                break;
+            case 'F':
+                devolver=5;
+                break;
+            default:
+                break;
+        }
+        return devolver;
+    }
+    
+    public int segundaCoordenadaMovimiento(String x){ //EXTRAIGO LA SEGUNDA COORDENADA DE LA FICHA A PONER
+        int devolver;
+        devolver=Character.getNumericValue(x.charAt(1))-1;
+        return devolver;
+    }
+    
     
     public void ranking() {
         Collections.sort(this.getListaJugadores());
@@ -67,6 +102,7 @@ public class Sistema {
         jugadorUnoFichas = 25;
         int jugadorDosFichas;
         jugadorDosFichas = 25;
+        String movimiento;
         int fichaI;
         int fichaJ;
         boolean movimientoValido;
@@ -82,7 +118,6 @@ public class Sistema {
         this.partida.setJugadorUno(this.listaJugadores.get(jUno));
         this.partida.setJugadorDos(this.listaJugadores.get(pidoDatoIntPositivo("Ingrese jugador dos: ",-1,this.listaJugadores.size(),jUno))); 
         //SETEA AMBOS JUGADORES DE LA PARTIDA
-        System.out.println("Para ingresar la posicion donde desea colocar la ficha, recuerde que la A=0,B=1,C=2,D=3,E=4,F=5");
         boolean cond = false;
         boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE JUNO SI ES FALSE JDOS
         while (!cond) {
@@ -94,8 +129,9 @@ public class Sistema {
                 System.out.println("Es el turno del jugador dos");
             }
             while (movimientoValido==false){  //SALE DEL WHILE CUANDO SE COMPROBO QUE EL LUGAR DONDE LA PERSONA QUIERE PONER LA FICHA ES VALIDO
-                fichaI = pidoDatoIntPositivo("Ingrese la fila de la ficha",-1,6,-1);
-                fichaJ = pidoDatoIntPositivo("Ingrese la columna de la ficha",-1,6,-1);
+                movimiento = pidoDatosParaMovimientoValido("Ingrese las coordenadas de donde desee colocar la ficha. Si el movimiento no es valido o el formato no es correcto se le volvera a pedir.");              
+                fichaI = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
+                fichaJ = this.segundaCoordenadaMovimiento(movimiento);
                 if (libroDeReglas.formaCuadrado(fichaI,fichaJ,this.partida.getTablero())==false){ //ACA PONGO TODOS LOS METODOS QUE VALIDAN EL MOVIMIENTO, 
                     if (libroDeReglas.hayFicha(fichaI,fichaJ,this.partida.getTablero())==false){  //SI LOS PASA TODOS ENTONCES VALIDO EL MOVIMIENTO Y SIGO DE LARGO
                         if(esPrimerTurno==true || libroDeReglas.tieneAdyacente(fichaI, fichaJ, this.partida.getTablero())){
@@ -140,6 +176,7 @@ public class Sistema {
         this.partida = new Partida();
         int fichaI;
         int fichaJ;
+        String movimiento;
         boolean movimientoValido;
         boolean esPrimerTurno=true;
         System.out.println("Este es el listado de los jugadores disponibles.");
@@ -151,12 +188,12 @@ public class Sistema {
         //JUGADOR DOS NO SE SETEA PORQUE ES LA PC Y NO  ES NECESARIO.
         boolean cond = false;
         boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE JUNO SI ES FALSE JDOS
-        System.out.println("Para ingresar la posicion donde desea colocar la ficha, recuerde que la A=0,B=1,C=2,D=3,E=4,F=5");
         while (!cond) {
             if (turnoDe==false){
                 System.out.println("Es el turno del jugador.");
-                fichaI = pidoDatoIntPositivo("Ingrese la fila de la ficha",-1,6,-1);
-                fichaJ = pidoDatoIntPositivo("Ingrese la columna de la ficha",-1,6,-1);            
+                movimiento = pidoDatosParaMovimientoValido("Ingrese las coordenadas de donde desee colocar la ficha. Si el movimiento no es valido o el formato no es correcto se le volvera a pedir.");              
+                fichaI = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
+                fichaJ = this.segundaCoordenadaMovimiento(movimiento);        
             
             }
             else {
