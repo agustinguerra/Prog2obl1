@@ -8,6 +8,18 @@ public class Program {
     public static void main(String[] args) {
         Sistema sistema = new Sistema();
         Interfaz interfaz = new Interfaz(sistema);
+        Jugador jugador1 = new Jugador();
+        Jugador jugador2 = new Jugador();
+        jugador1.setAlias("Agus");
+        jugador1.setEdad(23);
+        jugador1.setJuegosGanados(0);
+        jugador1.setNombre("Agustin");
+        jugador2.setAlias("Juanchi");
+        jugador2.setEdad(23);
+        jugador2.setJuegosGanados(0);
+        jugador2.setNombre("Juanchi");
+        sistema.getListaJugadores().add(jugador1);
+        sistema.getListaJugadores().add(jugador1);
         interfaz.menu();
     }
 
@@ -46,9 +58,15 @@ public class Program {
     public static String pidoDatosParaMovimientoValido (String msg) {
         System.out.println(msg);
         String x = (new Scanner(System.in)).nextLine();
-        while ((x.length() != 2) || (x.charAt(0)>='F' || x.charAt(0)<='A') || (Character.getNumericValue(x.charAt(1))>=6 || Character.getNumericValue(x.charAt(1))<=1)){
+        boolean cond;
+        cond = false;
+        cond = (x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
+        while (!cond){           
             System.out.println(msg);
             x = (new Scanner(System.in)).nextLine();
+            System.out.println("lalal");
+            cond = (x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
+            
         }
         return x;        
     }

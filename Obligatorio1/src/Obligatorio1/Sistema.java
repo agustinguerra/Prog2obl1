@@ -103,15 +103,15 @@ public class Sistema {
         int jugadorDosFichas;
         jugadorDosFichas = 25;
         String movimiento;
-        int fichaI;
-        int fichaJ;
+        int fichaI=0;
+        int fichaJ=0;
         boolean movimientoValido;
         boolean esPrimerTurno=true;
         this.partida = new Partida();
         //ACA VA DONDE SE LISTA LOS JUGADORES, Y SE LE PIDE AL USUARIO QUE ELIGA CON CUALES QUIERE JUGAR
         System.out.println("Este es el listado de los jugadores disponibles.");
         for (int i = 0; i < this.listaJugadores.size(); i++) {
-            System.out.print(i);
+            System.out.print(i+" \n");          
             System.out.println(this.listaJugadores.get(i));
         }
         int jUno = pidoDatoIntPositivo("Ingrese jugador uno: ",-1,this.listaJugadores.size(),-1);
@@ -120,32 +120,34 @@ public class Sistema {
         //SETEA AMBOS JUGADORES DE LA PARTIDA
         boolean cond = false;
         boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE JUNO SI ES FALSE JDOS
+        int intTurnoDe=0;
         while (!cond) {
             movimientoValido=false;
-            if (turnoDe==true){ //DEPENDE DE QUIEN SEA EL TURNO, A QUIEN LE DOY LA BIENVENIDA
+            this.partida.getTablero().dibujarTablero();
+            if (turnoDe){ //DEPENDE DE QUIEN SEA EL TURNO, A QUIEN LE DOY LA BIENVENIDA
                 System.out.println("Es el turno del jugador uno");
+                intTurnoDe=1;
             }
             else {
                 System.out.println("Es el turno del jugador dos");
+                intTurnoDe=2;
             }
-            while (movimientoValido==false){  //SALE DEL WHILE CUANDO SE COMPROBO QUE EL LUGAR DONDE LA PERSONA QUIERE PONER LA FICHA ES VALIDO
+            while (!movimientoValido){  //SALE DEL WHILE CUANDO SE COMPROBO QUE EL LUGAR DONDE LA PERSONA QUIERE PONER LA FICHA ES VALIDO
                 movimiento = pidoDatosParaMovimientoValido("Ingrese las coordenadas de donde desee colocar la ficha. Si el movimiento no es valido o el formato no es correcto se le volvera a pedir.");              
-                fichaI = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
-                fichaJ = this.segundaCoordenadaMovimiento(movimiento);
-                if (libroDeReglas.formaCuadrado(fichaI,fichaJ,this.partida.getTablero())==false){ //ACA PONGO TODOS LOS METODOS QUE VALIDAN EL MOVIMIENTO, 
-                    if (libroDeReglas.hayFicha(fichaI,fichaJ,this.partida.getTablero())==false){  //SI LOS PASA TODOS ENTONCES VALIDO EL MOVIMIENTO Y SIGO DE LARGO
-                        if(esPrimerTurno==true || libroDeReglas.tieneAdyacente(fichaI, fichaJ, this.partida.getTablero())){
-                            esPrimerTurno=false; //SI ES EL PRIMER TURNO, NUNCA VA A TENER ADYACENTE, POR ESO ESTE CONTROL ESPECIAL
-                            movimientoValido=true; //CONFIRMO QUE ES MOVIMIENTO VALIDO, SALE DEL WHILE Y SIGUE LA JUGADA.
-                        }
-                    }                
+                fichaJ = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
+                fichaI = this.segundaCoordenadaMovimiento(movimiento);
+                if (!libroDeReglas.formaCuadrado(fichaI,fichaJ,this.partida.getTablero())){ //ACA PONGO TODOS LOS METODOS QUE VALIDAN EL MOVIMIENTO, 
+                    if(esPrimerTurno==true || libroDeReglas.tieneAdyacente(fichaI, fichaJ, this.partida.getTablero())){
+                        esPrimerTurno=false; //SI ES EL PRIMER TURNO, NUNCA VA A TENER ADYACENTE, POR ESO ESTE CONTROL ESPECIAL
+                        movimientoValido=true; //CONFIRMO QUE ES MOVIMIENTO VALIDO, SALE DEL WHILE Y SIGUE LA JUGADA.
+                    }                                 
                 }
                 if (movimientoValido==false){ //SI EL MOVIMIENTO NO FUE VALIDO, LO INFORMO PARA QUE EL JUGADOR SEPA.
                     System.out.println("El movimiento que quiso hacer no fue valido. Intente de nuevo.");
                 }
             }
             //AQUI YA SE A DONDE EL JUGADOR QUIERE MOVER LA FICHA, Y SE QUE EL MOVIMIENTO ES VALIDO. PROCEDO A HACER LA JUGADA
-
+            libroDeReglas.seFormoEsquina(fichaI, fichaJ, this.partida.getTablero(), intTurnoDe);
             
             
             
