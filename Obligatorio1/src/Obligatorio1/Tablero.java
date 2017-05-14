@@ -44,7 +44,7 @@ public class Tablero {
     public void dibujarTablero(){
         int dimensiones = 6;
         System.out.println("");
-        System.out.println("    A    B    C    D    E    F");
+        System.out.println("    1    2    3    4    5    6");
         for (int row = 0; row < dimensiones; row++)
         {
             if (row!=0){
@@ -54,7 +54,27 @@ public class Tablero {
             for (int column = 0; column < dimensiones; column++)
             {
                 if (column==0){
-                    System.out.print(row+1+"| " + stringFicha((this.getFicha(row,column))) + " ");
+                    switch (row) {
+                        case 0:
+                            System.out.print("A");
+                            break;
+                        case 1:
+                            System.out.print("B");
+                            break;
+                        case 2:
+                            System.out.print("C");
+                            break;
+                        case 3:
+                            System.out.print("D");
+                            break;
+                        case 4:
+                            System.out.print("E");
+                            break;
+                        case 5:
+                            System.out.print("F");
+                            break;                
+                        }
+                    System.out.print("| " + stringFicha((this.getFicha(row,column))) + " ");
                 }
                 else{
                     System.out.print(" | " + stringFicha((this.getFicha(row,column))) + " ");

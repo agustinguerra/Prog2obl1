@@ -26,8 +26,52 @@ public class Interfaz {
     public int cantidadJugadores() {
         return sistema.getListaJugadores().size();
     }
-
-
+    //METODO UTILIZADO POR REGLAS PARA IMPRIMIR LA POSICION DONDE SE COLOCAN CUBOS  
+    public void imprimePosicionCubo(int i,int j){
+        System.out.print("Se va a poner un cubo en la posicion ");
+        String imprimir="";
+        switch (i) {
+            case 0:
+                imprimir="A";
+                break;
+            case 1:
+                imprimir="B";
+                break;
+            case 2:
+                imprimir="C";
+                break;
+            case 3:
+                imprimir="D";
+                break;
+            case 4:
+                imprimir="E";
+                break;
+            case 5:
+                imprimir="F";
+                break;                
+        }
+        switch (j) {
+            case 0:
+                imprimir=imprimir+"1";
+                break;
+            case 1:
+                imprimir=imprimir+"2";
+                break;
+            case 2:
+                imprimir=imprimir+"3";
+                break;
+            case 3:
+                imprimir=imprimir+"4";
+                break;
+            case 4:
+                imprimir=imprimir+"5";
+                break;
+            case 5:
+                imprimir=imprimir+"6";
+                break;                
+        }
+        System.out.println(imprimir);
+    }
     
     public void menu() {
         boolean cond = false;

@@ -105,6 +105,8 @@ public class Sistema {
         String movimiento;
         int fichaI=0;
         int fichaJ=0;
+        int cantidadFichasTableroPreColocar=0;
+        int cantidadFichasTableroPostColocar=0;
         boolean movimientoValido;
         boolean esPrimerTurno=true;
         this.partida = new Partida();
@@ -120,7 +122,7 @@ public class Sistema {
         //SETEA AMBOS JUGADORES DE LA PARTIDA
         boolean cond = false;
         boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE JUNO SI ES FALSE JDOS
-        int intTurnoDe=0;
+        int intTurnoDe;
         while (!cond) {
             movimientoValido=false;
             this.partida.getTablero().dibujarTablero();
@@ -134,8 +136,8 @@ public class Sistema {
             }
             while (!movimientoValido){  //SALE DEL WHILE CUANDO SE COMPROBO QUE EL LUGAR DONDE LA PERSONA QUIERE PONER LA FICHA ES VALIDO
                 movimiento = pidoDatosParaMovimientoValido("Ingrese las coordenadas de donde desee colocar la ficha. Si el movimiento no es valido o el formato no es correcto se le volvera a pedir.");              
-                fichaJ = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
-                fichaI = this.segundaCoordenadaMovimiento(movimiento);
+                fichaI = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
+                fichaJ = this.segundaCoordenadaMovimiento(movimiento);
                 if (!libroDeReglas.formaCuadrado(fichaI,fichaJ,this.partida.getTablero())){ //ACA PONGO TODOS LOS METODOS QUE VALIDAN EL MOVIMIENTO, 
                     if(esPrimerTurno==true || libroDeReglas.tieneAdyacente(fichaI, fichaJ, this.partida.getTablero())){
                         esPrimerTurno=false; //SI ES EL PRIMER TURNO, NUNCA VA A TENER ADYACENTE, POR ESO ESTE CONTROL ESPECIAL
@@ -147,12 +149,23 @@ public class Sistema {
                 }
             }
             //AQUI YA SE A DONDE EL JUGADOR QUIERE MOVER LA FICHA, Y SE QUE EL MOVIMIENTO ES VALIDO. PROCEDO A HACER LA JUGADA
+            //ANTES DE PONER LA FICHA, ME FIJO CUANTAS FICHAS HABIA EN EL TABLERO
+            cantidadFichasTableroPreColocar=libroDeReglas.calcularCantidadFichas(this.partida.getTablero());
             libroDeReglas.seFormoEsquina(fichaI, fichaJ, this.partida.getTablero(), intTurnoDe);
+            //ACA VA EL METODO DE EXTENDERLAS
             
+            //LUEGO DE CHEQUEAR ESQUINAS Y EXTENDIDAS, CUENTO CUANTAS FICHAS SE PUSIERON
+            //SOUTEO CUANTAS SE PUSIERON, Y SE LAS RESTO AL MONTON DE FICHAS DEL JUGADOR INDICADO
+            cantidadFichasTableroPostColocar=libroDeReglas.calcularCantidadFichas(this.partida.getTablero());
+            if (intTurnoDe==1){
+                jugadorUnoFichas=jugadorUnoFichas-(cantidadFichasTableroPostColocar-cantidadFichasTableroPreColocar);
+            }
+            else{
+                jugadorDosFichas=jugadorDosFichas-(cantidadFichasTableroPostColocar-cantidadFichasTableroPreColocar);
+            }
             
-            
-            
-            
+            System.out.println("Al jugador uno le quedan "+jugadorUnoFichas+" cubos"); 
+            System.out.println("Al jugador dos le quedan "+jugadorDosFichas+" cubos"); 
             if ((jugadorUnoFichas==0) || (jugadorDosFichas==0)){ //CHEQUEO AL FINAL DE CADA TURNO PARA VER SI SE TERMINO LA PARTIDA
                 cond=true;
             }
