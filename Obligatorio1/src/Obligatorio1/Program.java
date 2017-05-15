@@ -15,9 +15,9 @@ public class Program {
         jugador1.setJuegosGanados(0);
         jugador1.setNombre("Agustin");
         jugador2.setAlias("Juanchi");
-        jugador2.setEdad(23);
+        jugador2.setEdad(25);
         jugador2.setJuegosGanados(0);
-        jugador2.setNombre("Juanchi");
+        jugador2.setNombre("Juancho");
         sistema.getListaJugadores().add(jugador1);
         sistema.getListaJugadores().add(jugador2);
         interfaz.menu();
