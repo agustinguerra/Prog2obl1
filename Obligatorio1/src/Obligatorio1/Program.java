@@ -19,7 +19,7 @@ public class Program {
         jugador2.setJuegosGanados(0);
         jugador2.setNombre("Juanchi");
         sistema.getListaJugadores().add(jugador1);
-        sistema.getListaJugadores().add(jugador1);
+        sistema.getListaJugadores().add(jugador2);
         interfaz.menu();
     }
 
@@ -58,13 +58,11 @@ public class Program {
     public static String pidoDatosParaMovimientoValido (String msg) {
         System.out.println(msg);
         String x = (new Scanner(System.in)).nextLine();
-        boolean cond;
-        cond = false;
-        cond = (x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
+        boolean cond;       
+        cond = x.equals("X")||(x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
         while (!cond){           
             System.out.println(msg);
             x = (new Scanner(System.in)).nextLine();
-            System.out.println("lalal");
             cond = (x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
             
         }

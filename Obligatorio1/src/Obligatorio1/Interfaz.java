@@ -26,62 +26,63 @@ public class Interfaz {
     public int cantidadJugadores() {
         return sistema.getListaJugadores().size();
     }
+
     //METODO UTILIZADO POR REGLAS PARA IMPRIMIR LA POSICION DONDE SE COLOCAN CUBOS  
-    public void imprimePosicionCubo(int i,int j){
+    public void imprimePosicionCubo(int i, int j) {
         System.out.print("Se va a poner un cubo en la posicion ");
-        String imprimir="";
+        String imprimir = "";
         switch (i) {
             case 0:
-                imprimir="A";
+                imprimir = "A";
                 break;
             case 1:
-                imprimir="B";
+                imprimir = "B";
                 break;
             case 2:
-                imprimir="C";
+                imprimir = "C";
                 break;
             case 3:
-                imprimir="D";
+                imprimir = "D";
                 break;
             case 4:
-                imprimir="E";
+                imprimir = "E";
                 break;
             case 5:
-                imprimir="F";
-                break;                
+                imprimir = "F";
+                break;
         }
         switch (j) {
             case 0:
-                imprimir=imprimir+"1";
+                imprimir = imprimir + "1";
                 break;
             case 1:
-                imprimir=imprimir+"2";
+                imprimir = imprimir + "2";
                 break;
             case 2:
-                imprimir=imprimir+"3";
+                imprimir = imprimir + "3";
                 break;
             case 3:
-                imprimir=imprimir+"4";
+                imprimir = imprimir + "4";
                 break;
             case 4:
-                imprimir=imprimir+"5";
+                imprimir = imprimir + "5";
                 break;
             case 5:
-                imprimir=imprimir+"6";
-                break;                
+                imprimir = imprimir + "6";
+                break;
         }
         System.out.println(imprimir);
     }
-    
+
     public void menu() {
         boolean cond = false;
-        System.out.println("MENU");
-        System.out.println("1) REGISTRO DE JUGADOR");
-        System.out.println("2) JUGAR PARTIDA MANUAL");
-        System.out.println("3) JUGAR PARTIDA CONTRA LA PC");
-        System.out.println("4) RANKING");
-        System.out.println("5) SALIR");
         while (!cond) {
+            System.out.println("MENU");
+            System.out.println("1) REGISTRO DE JUGADOR");
+            System.out.println("2) JUGAR PARTIDA MANUAL");
+            System.out.println("3) JUGAR PARTIDA CONTRA LA PC");
+            System.out.println("4) RANKING");
+            System.out.println("5) SALIR");
             int menu = pidoDatoIntPositivo("Ingrese la opcion del menu", 0, 6, -1);
             switch (menu) {
                 case 1:
