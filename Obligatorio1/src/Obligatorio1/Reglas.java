@@ -412,21 +412,12 @@ public class Reglas {
                     interfaz.imprimePosicionCubo(i, j - 1);
                     fichasDisponibles = fichasDisponibles - 1;
                 }
-<<<<<<< HEAD
-                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
-                    tablero.getFicha(i+1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i+1, j);
-                    fichasDisponibles=fichasDisponibles-1;
-=======
-                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j - 1).getValor() < 5) {
-                    //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i + 1, j - 1).setValor(tablero.getFicha(i + 1, j - 1).getValor() + 1);
-                    tablero.getFicha(i + 1, j - 1).setColor(color);
-                    interfaz.imprimePosicionCubo(i + 1, j - 1);
+                    tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
+                    tablero.getFicha(i + 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i + 1, j);
                     fichasDisponibles = fichasDisponibles - 1;
->>>>>>> origin/master
                 }
                 if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
