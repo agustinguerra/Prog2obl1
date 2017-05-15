@@ -191,10 +191,14 @@ public class Sistema {
             int jGanados = this.partida.getJugadorUno().getJuegosGanados();
             this.partida.getJugadorUno().setJuegosGanados(jGanados + 1);
             System.out.println("Gano el jugador uno");
+            System.out.print("El puntaje del ganador fue: ");
+            System.out.println(libroDeReglas.calcularPuntaje(1, this.partida.getTablero()));
         } else if (libroDeReglas.calcularPuntaje(1, this.partida.getTablero()) < libroDeReglas.calcularPuntaje(2, this.partida.getTablero())) {
             int jGanados = this.partida.getJugadorDos().getJuegosGanados();
             this.partida.getJugadorDos().setJuegosGanados(jGanados+1);
             System.out.println("Gano el jugador dos");
+            System.out.print("El puntaje del ganador fue: ");
+            System.out.println(libroDeReglas.calcularPuntaje(2, this.partida.getTablero()));
         }
         else {
             System.out.println("El juego termino en empate");
