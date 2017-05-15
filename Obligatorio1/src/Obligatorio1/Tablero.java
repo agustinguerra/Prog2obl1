@@ -17,43 +17,41 @@ public class Tablero {
     }
 
     //METODO QUE PERMITE OBETENER UNA FICHA DEL TABLERO
-    public Ficha getFicha(int i,int j){
+    public Ficha getFicha(int i, int j) {
         return this.matriz[i][j];
     }
-        
+
     //CONSTRUCTOR CON PARAMETROS DE LA CLASE TABLERO
     public Tablero(Ficha[][] matriz) {
         this.matriz = matriz;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                matriz[i][j] = new Ficha(Ficha.ANSI_BLACK,0);
+                matriz[i][j] = new Ficha(Ficha.ANSI_BLACK, 0);
             }
         }
     }
 
     //LE DAS LA FICHA, Y TE DEVUELVE LA STRING CON EL VALOR YA PINTADO DEL COLOR CORRECTO
-    public String stringFicha(Ficha fich){
-        String fichaParaImprimir=" ";
-        if (fich.getValor()>0){
-            fichaParaImprimir=fich.getColor()+fich.getValor()+ANSI_RESET;
+    public String stringFicha(Ficha fich) {
+        String fichaParaImprimir = " ";
+        if (fich.getValor() > 0) {
+            fichaParaImprimir = fich.getColor() + fich.getValor() + ANSI_RESET;
         }
         return fichaParaImprimir;
-    } 
-    
+    }
+
     //ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA. NO ESTA DIBUJANDO LA ULTIMA LINEA, REVISAR LUEGO
-    public void dibujarTablero(){
+    public void dibujarTablero() {
         int dimensiones = 6;
         System.out.println("");
         System.out.println("    1    2    3    4    5    6");
-        for (int row = 0; row < dimensiones; row++)
-        {
-            if (row!=0){
-            System.out.println("");
+        for (int row = 0; row < dimensiones; row++) {
+            if (row != 0) {
+                System.out.println("");
             }
             System.out.println("  -----------------------------");
-            for (int column = 0; column < dimensiones; column++)
-            {
-                if (column==0){
+            for (int column = 0; column < dimensiones; column++) {
+                if (column == 0) {
                     switch (row) {
                         case 0:
                             System.out.print("A");
@@ -72,29 +70,27 @@ public class Tablero {
                             break;
                         case 5:
                             System.out.print("F");
-                            break;                
-                        }
-                    System.out.print("| " + stringFicha((this.getFicha(row,column))) + " ");
+                            break;
+                    }
+                    System.out.print("| " + stringFicha((this.getFicha(row, column))) + " ");
+                } else {
+                    System.out.print(" | " + stringFicha((this.getFicha(row, column))) + " ");
                 }
-                else{
-                    System.out.print(" | " + stringFicha((this.getFicha(row,column))) + " ");
-                }
-                
-            }       
+
+            }
             System.out.print(" |");
         }
         System.out.println("");
         System.out.println("  -----------------------------");
     }
-    
+
     //CONSTRUCTOR VACIO DE LA CLASE TABLERO
     public Tablero() {
         this.matriz = new Ficha[6][6];
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                matriz[i][j] = new Ficha(Ficha.ANSI_BLACK,0);
+                matriz[i][j] = new Ficha(Ficha.ANSI_BLACK, 0);
             }
         }
     }
-
 }

@@ -11,7 +11,7 @@ public class Condiciones {
     private boolean diagonalAbajoIzquierda;
     private boolean diagonalAbajoDerecha;
 
-    private boolean cond;
+    private boolean condInternaDelTablero;
     private boolean condExternaUno;
     private boolean condExternaDos;
     private boolean condExternaTres;
@@ -81,12 +81,12 @@ public class Condiciones {
         this.diagonalAbajoDerecha = diagonalAbajoDerecha;
     }
 
-    public boolean isCond() {
-        return cond;
+    public boolean isCondInternaDelTablero() {
+        return condInternaDelTablero;
     }
 
     public void setCond(boolean cond) {
-        this.cond = cond;
+        this.condInternaDelTablero = cond;
     }
 
     public boolean isCondExternaUno() {
@@ -132,7 +132,7 @@ public class Condiciones {
         this.diagonalAbajoDerecha = false;
 
         //ESTA CONDICION EVALUA SI ES INTERNO O EXTERNO
-        this.cond = false;
+        this.condInternaDelTablero = false;
 
         //ESTAS CONDICIONES EVALUAN FICHAS EXTERNAS
         this.condExternaUno = false;
@@ -151,7 +151,7 @@ public class Condiciones {
 
     public void chequeadorCondiciones(int i, int j, Tablero tablero) {
         //ESTA CONDICION EVALUA SI ES INTERNO O EXTERNO
-        this.cond = ((i > 0 && j > 0) && (i < 5 && j < 5));
+        this.condInternaDelTablero = ((i > 0 && j > 0) && (i < 5 && j < 5));
 
         //ESTAS CONDICIONES EVALUAN FICHAS EXTERNAS
         this.condExternaUno = ((i == 0) & ((j > 0) && (j < 5)));
@@ -159,7 +159,7 @@ public class Condiciones {
         this.condExternaTres = (j == 0 & ((i > 0) && (i < 5)));
         this.condExternaCuatro = (j == 5 & ((i > 0) && (i < 5)));
 
-        if (cond) {
+        if (condInternaDelTablero) {
             //INTERNO DEL TABLERO
 
             //ESTAS CONDICIONES EVALUAN ARRIBA ABAJO IZQUIEDA Y DERECHA
@@ -174,7 +174,7 @@ public class Condiciones {
             this.diagonalAbajoIzquierda = hayFicha(i + 1, j - 1, tablero);
             this.diagonalAbajoDerecha = hayFicha(i + 1, j + 1, tablero);
 
-        } else if (!cond) {
+        } else if (!condInternaDelTablero) {
             //EXTERNO DEL TABLERO
             switch (i) {
                 case 0:

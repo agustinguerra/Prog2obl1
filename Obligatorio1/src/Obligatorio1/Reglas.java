@@ -21,7 +21,7 @@ public class Reglas {
 
         if (!hayFicha) {
             this.condiciones.chequeadorCondiciones(i, j, tablero);
-            if (this.condiciones.isCond()) {
+            if (this.condiciones.isCondInternaDelTablero()) {
                 //INTERNO DEL TABLERO
                 if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoIzquierda()) {
                     devuelve = true;
@@ -35,7 +35,7 @@ public class Reglas {
                 if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && this.condiciones.isDiagonalArribaDerecha()) {
                     devuelve = true;
                 }
-            } else if (!this.condiciones.isCond()) {
+            } else if (!this.condiciones.isCondInternaDelTablero()) {
                 //EXTERNO DEL TABLERO
                 switch (i) {
                     case 0:
@@ -125,9 +125,9 @@ public class Reglas {
         }
         return puntaje;
     }
-    
+
     public int calcularCantidadFichas(Tablero tablero) {
-        int cantidad = 0;        
+        int cantidad = 0;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 cantidad = cantidad + tablero.getFicha(i, j).getValor();
@@ -140,12 +140,12 @@ public class Reglas {
         boolean devuelve = false;
         this.condiciones.chequeadorCondiciones(i, j, tablero);
 
-        if (this.condiciones.isCond()) {
+        if (this.condiciones.isCondInternaDelTablero()) {
             //INTERNO DEL TABLERO
             if (this.condiciones.isCondIzquierda() || this.condiciones.isCondAbajo() || this.condiciones.isCondDerecha() || this.condiciones.isCondArriba() || this.condiciones.isDiagonalAbajoIzquierda() || this.condiciones.isDiagonalAbajoDerecha() || this.condiciones.isDiagonalArribaIzquierda() || this.condiciones.isDiagonalArribaDerecha()) {
                 devuelve = true;
             }
-        } else if (!this.condiciones.isCond()) {
+        } else if (!this.condiciones.isCondInternaDelTablero()) {
             //EXTERNO DEL TABLERO
             switch (i) {
                 case 0:
@@ -202,357 +202,366 @@ public class Reglas {
         return devuelve;
     }
 
-    public int seFormoEsquina(int i, int j, Tablero tablero, int color,int fichasDisponibles) { //CHEQUEA SI SE FORMARON O NO ESQUINAS AL MOMENTO DE PONER LA FICHA
+    public int seFormoEsquina(int i, int j, Tablero tablero, int color, int fichasDisponibles) { //CHEQUEA SI SE FORMARON O NO ESQUINAS AL MOMENTO DE PONER LA FICHA
         //PODEMOS HACER ESTO, QUE TE PARECE?
         //SI TE GUSTA PODEMOS HACER LO MISMO EN EL METODO DE ARRIBA
         //HICE LOS METODOS DE ARRIBA QUE FALTABAN, ESTE QUE ARRANCASTE VOS ENCARALO VOS, Y DESPUES LOS DOS QUE QUEDAN VEMOS COMO LO DIVIDIMOS
         this.condiciones.chequeadorCondiciones(i, j, tablero);
         //YA AGREGAMOS LA FICHA VALOR 1 Y COLOR DEL JUGADOR DE TURNO AL TABLERO Y DESP EVALUAMOS
-        Interfaz interfaz = new Interfaz();        
+        Interfaz interfaz = new Interfaz();
         tablero.getFicha(i, j).setValor(1);
-        fichasDisponibles=fichasDisponibles-1;
+        fichasDisponibles = fichasDisponibles - 1;
         interfaz.imprimePosicionCubo(i, j);
         tablero.getFicha(i, j).setColor(color);
-        if (this.condiciones.isCond()) {
+        if (this.condiciones.isCondInternaDelTablero()) {
             //INTERNO DEL TABLERO
-            if (this.condiciones.isCondArriba() && this.condiciones.isCondIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+            if (this.condiciones.isCondArriba() && this.condiciones.isCondIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                 interfaz.imprimePosicionCubo(i, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondArriba() && this.condiciones.isCondDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+            if (this.condiciones.isCondArriba() && this.condiciones.isCondDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                 interfaz.imprimePosicionCubo(i, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondAbajo() && this.condiciones.isCondIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+            if (this.condiciones.isCondAbajo() && this.condiciones.isCondIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                 interfaz.imprimePosicionCubo(i, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondAbajo() && this.condiciones.isCondDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+            if (this.condiciones.isCondAbajo() && this.condiciones.isCondDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                 interfaz.imprimePosicionCubo(i, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
             //ACA VAN LOS QUE AGREGUE, HASTA EL ELSE IF POR SI NO ANDA BORRAR ESO
-            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
                 tablero.getFicha(i + 1, j).setColor(color);
                 interfaz.imprimePosicionCubo(i + 1, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
                 tablero.getFicha(i, j + 1).setColor(color);
                 interfaz.imprimePosicionCubo(i, j + 1);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
                 tablero.getFicha(i, j - 1).setColor(color);
                 interfaz.imprimePosicionCubo(i, j - 1);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
                 tablero.getFicha(i + 1, j).setColor(color);
                 interfaz.imprimePosicionCubo(i + 1, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+            if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
                 tablero.getFicha(i - 1, j).setColor(color);
                 interfaz.imprimePosicionCubo(i - 1, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalArribaDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalArribaDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
                 tablero.getFicha(i, j + 1).setColor(color);
                 interfaz.imprimePosicionCubo(i, j + 1);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalArribaIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalArribaIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
                 tablero.getFicha(i, j - 1).setColor(color);
                 interfaz.imprimePosicionCubo(i, j - 1);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+            if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                 tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
                 tablero.getFicha(i - 1, j).setColor(color);
                 interfaz.imprimePosicionCubo(i - 1, j);
-                fichasDisponibles=fichasDisponibles-1;
+                fichasDisponibles = fichasDisponibles - 1;
             }
-            
-        } else if (!this.condiciones.isCond()) {
+
+        } else if (!this.condiciones.isCondInternaDelTablero()) {
             //EXTERNO DEL TABLERO
             switch (i) {
                 case 0:
                     switch (j) {
                         case 0:
-                            if (this.condiciones.isCondDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                            if (this.condiciones.isCondDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                                 interfaz.imprimePosicionCubo(i, j);
-                                fichasDisponibles=fichasDisponibles-1;
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+                            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i, j+1).setValor(tablero.getFicha(i, j+1).getValor() + 1);
-                                tablero.getFicha(i, j+1).setColor(color);
-                                interfaz.imprimePosicionCubo(i, j+1);
-                                fichasDisponibles=fichasDisponibles-1;
-                            }  
-                            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+                                tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
+                                tablero.getFicha(i, j + 1).setColor(color);
+                                interfaz.imprimePosicionCubo(i, j + 1);
+                                fichasDisponibles = fichasDisponibles - 1;
+                            }
+                            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
-                                tablero.getFicha(i+1, j).setColor(color);
-                                interfaz.imprimePosicionCubo(i+1, j);
-                                fichasDisponibles=fichasDisponibles-1;
-                            }                            
+                                tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
+                                tablero.getFicha(i + 1, j).setColor(color);
+                                interfaz.imprimePosicionCubo(i + 1, j);
+                                fichasDisponibles = fichasDisponibles - 1;
+                            }
                             break;
                         case 5:
-                            if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                            if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                                 interfaz.imprimePosicionCubo(i, j);
-                                fichasDisponibles=fichasDisponibles-1;
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+                            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i, j-1).setValor(tablero.getFicha(i, j-1).getValor() + 1);
-                                tablero.getFicha(i, j-1).setColor(color);
-                                interfaz.imprimePosicionCubo(i, j-1);
-                                fichasDisponibles=fichasDisponibles-1;
+                                tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
+                                tablero.getFicha(i, j - 1).setColor(color);
+                                interfaz.imprimePosicionCubo(i, j - 1);
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+                            if (this.condiciones.isCondAbajo() && this.condiciones.isDiagonalAbajoIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
-                                tablero.getFicha(i+1, j).setColor(color);
-                                interfaz.imprimePosicionCubo(i+1, j);
-                                fichasDisponibles=fichasDisponibles-1;
-                            }                            
+                                tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
+                                tablero.getFicha(i + 1, j).setColor(color);
+                                interfaz.imprimePosicionCubo(i + 1, j);
+                                fichasDisponibles = fichasDisponibles - 1;
+                            }
                             break;
                     }
                     break;
                 case 5:
                     switch (j) {
                         case 0:
-                            if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                            if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                                 interfaz.imprimePosicionCubo(i, j);
-                                fichasDisponibles=fichasDisponibles-1;
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+                            if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i-1, j).setValor(tablero.getFicha(i-1, j).getValor() + 1);
-                                tablero.getFicha(i-1, j).setColor(color);
-                                interfaz.imprimePosicionCubo(i-1, j);
-                                fichasDisponibles=fichasDisponibles-1;
+                                tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
+                                tablero.getFicha(i - 1, j).setColor(color);
+                                interfaz.imprimePosicionCubo(i - 1, j);
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalArribaDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+                            if (this.condiciones.isCondDerecha() && this.condiciones.isDiagonalArribaDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i, j+1).setValor(tablero.getFicha(i, j+1).getValor() + 1);
-                                tablero.getFicha(i, j+1).setColor(color);
-                                interfaz.imprimePosicionCubo(i, j+1);
-                                fichasDisponibles=fichasDisponibles-1;
-                            }                            
+                                tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
+                                tablero.getFicha(i, j + 1).setColor(color);
+                                interfaz.imprimePosicionCubo(i, j + 1);
+                                fichasDisponibles = fichasDisponibles - 1;
+                            }
                             break;
                         case 5:
-                            if (this.condiciones.isCondIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                            if (this.condiciones.isCondIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                                 tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                                 interfaz.imprimePosicionCubo(i, j);
-                                fichasDisponibles=fichasDisponibles-1;
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalArribaIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+                            if (this.condiciones.isCondIzquierda() && this.condiciones.isDiagonalArribaIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i, j-1).setValor(tablero.getFicha(i, j-1).getValor() + 1);
-                                tablero.getFicha(i, j-1).setColor(color);
-                                interfaz.imprimePosicionCubo(i, j-1);
-                                fichasDisponibles=fichasDisponibles-1;
+                                tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
+                                tablero.getFicha(i, j - 1).setColor(color);
+                                interfaz.imprimePosicionCubo(i, j - 1);
+                                fichasDisponibles = fichasDisponibles - 1;
                             }
-                            if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+                            if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                                 //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                                tablero.getFicha(i-1, j).setValor(tablero.getFicha(i-1, j).getValor() + 1);
-                                tablero.getFicha(i-1, j).setColor(color);
-                                interfaz.imprimePosicionCubo(i-1, j);
-                                fichasDisponibles=fichasDisponibles-1;
-                            }                            
+                                tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
+                                tablero.getFicha(i - 1, j).setColor(color);
+                                interfaz.imprimePosicionCubo(i - 1, j);
+                                fichasDisponibles = fichasDisponibles - 1;
+                            }
                             break;
                     }
                     break;
             }
 
             if (this.condiciones.isCondExternaUno()) {
-                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isCondDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j-1).setValor(tablero.getFicha(i, j-1).getValor() + 1);
-                    tablero.getFicha(i, j-1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j-1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
+                    tablero.getFicha(i, j - 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j - 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
+<<<<<<< HEAD
                 if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
                     tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
                     tablero.getFicha(i+1, j).setColor(color);
                     interfaz.imprimePosicionCubo(i+1, j);
                     fichasDisponibles=fichasDisponibles-1;
-                }
-                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+=======
+                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j - 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
-                    tablero.getFicha(i+1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i+1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i + 1, j - 1).setValor(tablero.getFicha(i + 1, j - 1).getValor() + 1);
+                    tablero.getFicha(i + 1, j - 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i + 1, j - 1);
+                    fichasDisponibles = fichasDisponibles - 1;
+>>>>>>> origin/master
                 }
-                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j+1).setValor(tablero.getFicha(i, j+1).getValor() + 1);
-                    tablero.getFicha(i, j+1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j+1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
+                    tablero.getFicha(i + 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i + 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                
+                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
+                    //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
+                    tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
+                    tablero.getFicha(i, j + 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j + 1);
+                    fichasDisponibles = fichasDisponibles - 1;
+                }
+
             }
             if (this.condiciones.isCondExternaDos()) {
-                if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j-1).setValor(tablero.getFicha(i, j-1).getValor() + 1);
-                    tablero.getFicha(i, j-1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j-1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
+                    tablero.getFicha(i, j - 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j - 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i-1, j).setValor(tablero.getFicha(i-1, j).getValor() + 1);
-                    tablero.getFicha(i-1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i-1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
+                    tablero.getFicha(i - 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i - 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i-1, j).setValor(tablero.getFicha(i-1, j).getValor() + 1);
-                    tablero.getFicha(i-1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i-1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
+                    tablero.getFicha(i - 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i - 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j+1).setValor(tablero.getFicha(i, j+1).getValor() + 1);
-                    tablero.getFicha(i, j+1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j+1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
+                    tablero.getFicha(i, j + 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j + 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
             }
             if (this.condiciones.isCondExternaTres()) {
-                if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isCondDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i-1, j).setValor(tablero.getFicha(i-1, j).getValor() + 1);
-                    tablero.getFicha(i-1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i-1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
+                    tablero.getFicha(i - 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i - 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j+1).setValor(tablero.getFicha(i, j+1).getValor() + 1);
-                    tablero.getFicha(i, j+1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j+1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
+                    tablero.getFicha(i, j + 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j + 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles>=1 && tablero.getFicha(i, j+1).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondDerecha() && fichasDisponibles >= 1 && tablero.getFicha(i, j + 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j+1).setValor(tablero.getFicha(i, j+1).getValor() + 1);
-                    tablero.getFicha(i, j+1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j+1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j + 1).setValor(tablero.getFicha(i, j + 1).getValor() + 1);
+                    tablero.getFicha(i, j + 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j + 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoDerecha() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
-                    tablero.getFicha(i+1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i+1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
+                    tablero.getFicha(i + 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i + 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
             }
             if (this.condiciones.isCondExternaCuatro()) {
-                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i, j).getValor()<5) {
+                if (this.condiciones.isCondIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i, j).getValor() < 5) {
                     tablero.getFicha(i, j).setValor(tablero.getFicha(i, j).getValor() + 1);
                     interfaz.imprimePosicionCubo(i, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles>=1 && tablero.getFicha(i-1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondArriba() && fichasDisponibles >= 1 && tablero.getFicha(i - 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i-1, j).setValor(tablero.getFicha(i-1, j).getValor() + 1);
-                    tablero.getFicha(i-1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i-1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i - 1, j).setValor(tablero.getFicha(i - 1, j).getValor() + 1);
+                    tablero.getFicha(i - 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i - 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+                if (this.condiciones.isDiagonalArribaIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j-1).setValor(tablero.getFicha(i, j-1).getValor() + 1);
-                    tablero.getFicha(i, j-1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j-1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
+                    tablero.getFicha(i, j - 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j - 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles>=1 && tablero.getFicha(i, j-1).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondIzquierda() && fichasDisponibles >= 1 && tablero.getFicha(i, j - 1).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i, j-1).setValor(tablero.getFicha(i, j-1).getValor() + 1);
-                    tablero.getFicha(i, j-1).setColor(color);
-                    interfaz.imprimePosicionCubo(i, j-1);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i, j - 1).setValor(tablero.getFicha(i, j - 1).getValor() + 1);
+                    tablero.getFicha(i, j - 1).setColor(color);
+                    interfaz.imprimePosicionCubo(i, j - 1);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
-                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles>=1 && tablero.getFicha(i+1, j).getValor()<5) {
+                if (this.condiciones.isDiagonalAbajoIzquierda() && this.condiciones.isCondAbajo() && fichasDisponibles >= 1 && tablero.getFicha(i + 1, j).getValor() < 5) {
                     //TARIA BUENO UN METODO PROPIO DE LA CLASE QUE SEA INCREMENTAR POR ESQUINA (CLASE TABLERO)
-                    tablero.getFicha(i+1, j).setValor(tablero.getFicha(i+1, j).getValor() + 1);
-                    tablero.getFicha(i+1, j).setColor(color);
-                    interfaz.imprimePosicionCubo(i+1, j);
-                    fichasDisponibles=fichasDisponibles-1;
+                    tablero.getFicha(i + 1, j).setValor(tablero.getFicha(i + 1, j).getValor() + 1);
+                    tablero.getFicha(i + 1, j).setColor(color);
+                    interfaz.imprimePosicionCubo(i + 1, j);
+                    fichasDisponibles = fichasDisponibles - 1;
                 }
             }
         }
@@ -563,21 +572,21 @@ public class Reglas {
         int fichasAPoner = 0;
         return fichasAPoner;
     } //no se si se va a usar, verificar borrarlo antes de borrar este comentario si no se uso
-    
-    public int seExtendioEsquina(int i,int j,Tablero tablero,int color,int fichasDisponibles){
-        int iAtras=i-1;
-        int iAdelante=i+1;
-        int jAtras=j-1;
-        int jAdelante=j+1;       
+
+    public int seExtendioEsquina(int i, int j, Tablero tablero, int color, int fichasDisponibles) {
+        int iAtras = i - 1;
+        int iAdelante = i + 1;
+        int jAtras = j - 1;
+        int jAdelante = j + 1;
         Interfaz interfaz = new Interfaz();
-        boolean hayFicha=true;
-        boolean tengoQueExtenderHaciaArriba=false;
-        boolean tengoQueExtenderHaciaAbajo=false;
+        boolean hayFicha = true;
+        boolean tengoQueExtenderHaciaArriba = false;
+        boolean tengoQueExtenderHaciaAbajo = false;
         //FOR QUE RECORRE LAS FILAS BUSCANDO ESQUINAS PARA EXTENDER.
-        for (int x=i-1;x>=0 && hayFicha;x--){
-            if (tablero.getFicha(x, j).getValor()>0){
-                hayFicha=true;
-                if(x!=i-1){
+        for (int x = i - 1; x >= 0 && hayFicha; x--) {
+            if (tablero.getFicha(x, j).getValor() > 0) {
+                hayFicha = true;
+                if (x != i - 1) {
                     if (j > 0) {
                         if (tablero.getFicha(x, j - 1).getValor() > 0) {
                             tengoQueExtenderHaciaArriba = true;
@@ -608,14 +617,14 @@ public class Reglas {
             tengoQueExtenderHaciaArriba = false;
             tengoQueExtenderHaciaAbajo = false;
         }
-        hayFicha=true;
-        tengoQueExtenderHaciaArriba=false;
-        tengoQueExtenderHaciaAbajo=false;
+        hayFicha = true;
+        tengoQueExtenderHaciaArriba = false;
+        tengoQueExtenderHaciaAbajo = false;
         //FOR QUE RECORRE LAS FILAS BUSCANDO ESQUINAS PARA EXTENDER.
-        for (int x=i+1;x<=5 && hayFicha;x++){
-            if (tablero.getFicha(x, j).getValor()>0){
-                hayFicha=true;
-                if(x!=i+1){
+        for (int x = i + 1; x <= 5 && hayFicha; x++) {
+            if (tablero.getFicha(x, j).getValor() > 0) {
+                hayFicha = true;
+                if (x != i + 1) {
                     if (j > 0) {
                         if (tablero.getFicha(x, j - 1).getValor() > 0) {
                             tengoQueExtenderHaciaArriba = true;
@@ -646,21 +655,21 @@ public class Reglas {
             tengoQueExtenderHaciaArriba = false;
             tengoQueExtenderHaciaAbajo = false;
         }
-        hayFicha=true;
-        tengoQueExtenderHaciaArriba=false;
-        tengoQueExtenderHaciaAbajo=false;
+        hayFicha = true;
+        tengoQueExtenderHaciaArriba = false;
+        tengoQueExtenderHaciaAbajo = false;
         //FOR QUE RECORRE LAS FILAS BUSCANDO ESQUINAS PARA EXTENDER.
-        for (int x=j-1;x>=0 && hayFicha;x--){
-            if (tablero.getFicha(i, x).getValor()>0){
-                hayFicha=true;
-                if(x!=j-1){
+        for (int x = j - 1; x >= 0 && hayFicha; x--) {
+            if (tablero.getFicha(i, x).getValor() > 0) {
+                hayFicha = true;
+                if (x != j - 1) {
                     if (i > 0) {
-                        if (tablero.getFicha(i-1, x).getValor() > 0) {
+                        if (tablero.getFicha(i - 1, x).getValor() > 0) {
                             tengoQueExtenderHaciaArriba = true;
                         }
                     }
                     if (i < 5) {
-                        if (tablero.getFicha(i+1, x).getValor() > 0) {
+                        if (tablero.getFicha(i + 1, x).getValor() > 0) {
                             tengoQueExtenderHaciaAbajo = true;
                         }
                     }
@@ -684,21 +693,21 @@ public class Reglas {
             tengoQueExtenderHaciaArriba = false;
             tengoQueExtenderHaciaAbajo = false;
         }
-        hayFicha=true;
-        tengoQueExtenderHaciaArriba=false;
-        tengoQueExtenderHaciaAbajo=false;
+        hayFicha = true;
+        tengoQueExtenderHaciaArriba = false;
+        tengoQueExtenderHaciaAbajo = false;
         //FOR QUE RECORRE LAS FILAS BUSCANDO ESQUINAS PARA EXTENDER.
-        for (int x=j+1;x<=5 && hayFicha;x++){
-            if (tablero.getFicha(i, x).getValor()>0){
-                hayFicha=true;
-                if(x!=j+1){
+        for (int x = j + 1; x <= 5 && hayFicha; x++) {
+            if (tablero.getFicha(i, x).getValor() > 0) {
+                hayFicha = true;
+                if (x != j + 1) {
                     if (i > 0) {
-                        if (tablero.getFicha(i-1, x).getValor() > 0) {
+                        if (tablero.getFicha(i - 1, x).getValor() > 0) {
                             tengoQueExtenderHaciaArriba = true;
                         }
                     }
                     if (i < 5) {
-                        if (tablero.getFicha(i+1, x).getValor() > 0) {
+                        if (tablero.getFicha(i + 1, x).getValor() > 0) {
                             tengoQueExtenderHaciaAbajo = true;
                         }
                     }
@@ -724,5 +733,15 @@ public class Reglas {
         }
         return fichasDisponibles;
     }
-    
+        
+    public void barajarPosibilidades(Tablero tableroAUX) {
+        boolean[][] check = new boolean[6][6];
+        for (int i = 0; i < 10; i++) {
+            
+            
+        }
+    }
+    public void mejorJugadaPC(Tablero tablero) {
+        
+    }
 }

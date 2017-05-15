@@ -96,7 +96,7 @@ public class Sistema {
             System.out.println(this.listaJugadores.get(i));
         }        
     }
-    
+       
     public void jugarEntreJugadores() {
         int jugadorUnoFichas;
         jugadorUnoFichas = 25;
@@ -109,17 +109,22 @@ public class Sistema {
         boolean esPrimerTurno = true;
         this.partida = new Partida();
         //ACA VA DONDE SE LISTA LOS JUGADORES, Y SE LE PIDE AL USUARIO QUE ELIGA CON CUALES QUIERE JUGAR
+        
         System.out.println("Este es el listado de los jugadores disponibles.");
+        
+        
+        
         for (int i = 0; i < this.listaJugadores.size(); i++) {
-            System.out.print(i + " \n");
-            System.out.println(this.listaJugadores.get(i));
+            System.out.println((i + 1) + ") " + this.listaJugadores.get(i));
         }
-        int jUno = pidoDatoIntPositivo("Ingrese jugador uno: ", -1, this.listaJugadores.size(), -1);
-        this.partida.setJugadorUno(this.listaJugadores.get(jUno));
-        this.partida.setJugadorDos(this.listaJugadores.get(pidoDatoIntPositivo("Ingrese jugador dos: ", -1, this.listaJugadores.size(), jUno)));
+        int jUno = pidoDatoIntPositivo("Elija al jugador UNO: ", 0, this.listaJugadores.size() + 1, -1);
+        
         //SETEA AMBOS JUGADORES DE LA PARTIDA
+        this.partida.setJugadorUno(this.listaJugadores.get(jUno - 1));
+        this.partida.setJugadorDos(this.listaJugadores.get(pidoDatoIntPositivo("Elija al jugador DOS: ", 0, this.listaJugadores.size() + 1, jUno) - 1));
+        
         boolean cond = false;
-        boolean turnoDe = true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE JUNO SI ES FALSE JDOS
+        boolean turnoDe = true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE jUNO SI ES FALSE jDOS
         int intTurnoDe;
         while (!cond) {
             movimientoValido = false;
@@ -210,10 +215,10 @@ public class Sistema {
             System.out.print(i);
             System.out.println(this.listaJugadores.get(i));
         }
-        this.partida.setJugadorDos(this.listaJugadores.get(pidoDatoIntPositivo("Ingrese jugador dos: ",-1,this.listaJugadores.size(),-1)));
+        this.partida.setJugadorUno(this.listaJugadores.get(pidoDatoIntPositivo("Ingrese jugador dos: ",-1,this.listaJugadores.size(),-1)));
         //JUGADOR DOS NO SE SETEA PORQUE ES LA PC Y NO  ES NECESARIO.
         boolean cond = false;
-        boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE JUNO SI ES FALSE JDOS
+        boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE jUNO SI ES FALSE jDOS
         while (!cond) {
             if (turnoDe==false){
                 System.out.println("Es el turno del jugador.");
@@ -224,6 +229,7 @@ public class Sistema {
             }
             else {
                 //TURNO DE LA PC
+                inteligenciaArtificial();
             }            
             if ((jugadorUnoFichas==0) || (jugadorPCFichas==0)){ //CHEQUEO AL FINAL DE CADA TURNO PARA VER SI SE TERMINO LA PARTIDA
                 cond=true;
@@ -234,4 +240,11 @@ public class Sistema {
         }
         //VAMOS A SUMAR UNA VICTORIA SI EL JUGADOR LE GANA A LA MAQUINA?
     } 
+    
+    public void inteligenciaArtificial() {
+        Tablero tableroAux = this.partida.getTablero();
+        
+        
+        libroDeReglas.mejorJugadaPC(this.partida.getTablero());
+    }
 }
