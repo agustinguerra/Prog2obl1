@@ -195,60 +195,115 @@ public class Sistema {
             System.out.println(libroDeReglas.calcularPuntaje(1, this.partida.getTablero()));
         } else if (libroDeReglas.calcularPuntaje(1, this.partida.getTablero()) < libroDeReglas.calcularPuntaje(2, this.partida.getTablero())) {
             int jGanados = this.partida.getJugadorDos().getJuegosGanados();
-            this.partida.getJugadorDos().setJuegosGanados(jGanados+1);
+            this.partida.getJugadorDos().setJuegosGanados(jGanados + 1);
             System.out.println("Gano el jugador dos");
             System.out.print("El puntaje del ganador fue: ");
             System.out.println(libroDeReglas.calcularPuntaje(2, this.partida.getTablero()));
-        }
-        else {
+        } else {
             System.out.println("El juego termino en empate");
         }
     }
-    
+
     public void jugarContraPC() {
-        int jugadorUnoFichas = 25;
-        int jugadorPCFichas = 25;
-        this.partida = new Partida();
-        int fichaI;
-        int fichaJ;
+        int jugadorUnoFichas;
+        jugadorUnoFichas = 25;
+        int jugadorDosPC;
+        jugadorDosPC = 25;
         String movimiento;
+        int fichaI = 0;
+        int fichaJ = 0;
         boolean movimientoValido;
-        boolean esPrimerTurno=true;
+        boolean esPrimerTurno = true;
+        this.partida = new Partida();
+        //ACA VA DONDE SE LISTA LOS JUGADORES, Y SE LE PIDE AL USUARIO QUE ELIGA CON CUAL QUIERE JUGAR
+
         System.out.println("Este es el listado de los jugadores disponibles.");
+
         for (int i = 0; i < this.listaJugadores.size(); i++) {
-            System.out.print(i);
-            System.out.println(this.listaJugadores.get(i));
+            System.out.println((i + 1) + ") " + this.listaJugadores.get(i));
         }
-        this.partida.setJugadorUno(this.listaJugadores.get(pidoDatoIntPositivo("Ingrese jugador dos: ",-1,this.listaJugadores.size(),-1)));
-        //JUGADOR DOS NO SE SETEA PORQUE ES LA PC Y NO  ES NECESARIO.
+        int jUno = pidoDatoIntPositivo("Elija al jugador: ", 0, this.listaJugadores.size() + 1, -1);
+
+        //SETEA AMBOS JUGADORES DE LA PARTIDA
+        this.partida.setJugadorUno(this.listaJugadores.get(jUno - 1));
         boolean cond = false;
-        boolean turnoDe=true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE jUNO SI ES FALSE jDOS
+        boolean turnoDe = true; //BOOLEANO PARA SABER DE QUIEN ES EL TURNO, SI ES TRUE jUNO SI ES FALSE JUEGA PC
+        int intTurnoDe;
         while (!cond) {
-            if (turnoDe==false){
-                System.out.println("Es el turno del jugador.");
-                movimiento = pidoDatosParaMovimientoValido("Ingrese las coordenadas de donde desee colocar la ficha. Si el movimiento no es valido o el formato no es correcto se le volvera a pedir.");              
-                fichaI = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
-                fichaJ = this.segundaCoordenadaMovimiento(movimiento);        
-            
+            movimientoValido = false;
+            this.partida.getTablero().dibujarTablero();
+            if (turnoDe) { //DEPENDE DE QUIEN SEA EL TURNO, A QUIEN LE DOY LA BIENVENIDA
+                System.out.println("Es el turno del jugador uno");
+                intTurnoDe = 1;
+            } else {
+                System.out.println("Es el turno de la PC");
+                intTurnoDe = 2;
             }
-            else {
-                //TURNO DE LA PC
-                inteligenciaArtificial();
-            }            
-            if ((jugadorUnoFichas==0) || (jugadorPCFichas==0)){ //CHEQUEO AL FINAL DE CADA TURNO PARA VER SI SE TERMINO LA PARTIDA
-                cond=true;
-            }
-            else {
-                turnoDe=!turnoDe; //SI LA PARTIDA NO TERMINO, CAMBIO EL TURNO AL OTRO JUGADOR
+            while (!movimientoValido) {  //SALE DEL WHILE CUANDO SE COMPROBO QUE EL LUGAR DONDE LA PERSONA QUIERE PONER LA FICHA ES VALIDO
+                if (intTurnoDe == 1) { //FLUJO NORMAL, JUEGA EL JUGADOR
+                    movimiento = pidoDatosParaMovimientoValido("Ingrese las coordenadas de donde desee colocar la ficha. Si el movimiento no es valido o el formato no es correcto se le volvera a pedir. Para abanonar la partida ingrese X.");
+                    if (movimiento.equals("X")) {   //SI SE DA LA X, SE TERMINA EL JUEGO Y GANA EL JUGADOR PC, PORQUE LA PC NO PUEDE ABANDONAR
+                        System.out.println("Gano la PC");
+                        return;
+                    }
+                    fichaI = this.primerCoordenadaMovimiento(movimiento); //PRIMERO VALIDO LA STRING QUE ESTE EN EL FORMATO CORRECTO Y EN EL RANGO, Y LUEGO EXTRAIGO LAS COORDENADAS PARA TRABAJAR CON ELLAS
+                    fichaJ = this.segundaCoordenadaMovimiento(movimiento);
+                    if (!libroDeReglas.formaCuadrado(fichaI, fichaJ, this.partida.getTablero())) { //ACA PONGO TODOS LOS METODOS QUE VALIDAN EL MOVIMIENTO, 
+                        if (esPrimerTurno == true || libroDeReglas.tieneAdyacente(fichaI, fichaJ, this.partida.getTablero())) {
+                            esPrimerTurno = false; //SI ES EL PRIMER TURNO, NUNCA VA A TENER ADYACENTE, POR ESO ESTE CONTROL ESPECIAL
+                            movimientoValido = true; //CONFIRMO QUE ES MOVIMIENTO VALIDO, SALE DEL WHILE Y SIGUE LA JUGADA.
+                        }
+                    }
+                    if (movimientoValido == false) { //SI EL MOVIMIENTO NO FUE VALIDO, LO INFORMO PARA QUE EL JUGADOR SEPA.
+                        System.out.println("El movimiento que quiso hacer no fue valido. Intente de nuevo.");
+                    } else {
+                        //AQUI YA SE A DONDE EL JUGADOR UNO QUIERE MOVER LA FICHA, Y SE QUE EL MOVIMIENTO ES VALIDO. PROCEDO A HACER LA JUGADA
+                        jugadorUnoFichas = libroDeReglas.seFormoEsquina(fichaI, fichaJ, this.partida.getTablero(), intTurnoDe, jugadorUnoFichas);
+                        jugadorUnoFichas = libroDeReglas.seExtendioEsquina(fichaI, fichaJ, this.partida.getTablero(), intTurnoDe, jugadorUnoFichas);
+                        System.out.println("Al jugador le quedan " + jugadorUnoFichas + " cubos");
+                        System.out.println("A la PC le quedan " + jugadorDosPC + " cubos");
+                        if ((jugadorUnoFichas == 0)) { //CHEQUEO AL FINAL DE CADA TURNO PARA VER SI SE TERMINO LA PARTIDA
+                            cond = true;
+                        } else {
+                            turnoDe = !turnoDe; //SI LA PARTIDA NO TERMINO, CAMBIO EL TURNO A LA PC
+                        }
+                    }
+                } else { //JUEGA LA PC                    
+                    jugadorDosPC = inteligenciaArtificial(jugadorDosPC);
+                    //ESTO VA AL FINAL EL ESE JUEGA LA PC, LUEGO DEL MOVIMIENTO Y TODO
+                    movimientoValido = true; // AL FINAL VALIDO EL MOVIMIENTO DE LA PC PARA SALIR DEL WHILE
+                    if ((jugadorDosPC == 0)) { //CHEQUEO AL FINAL DE CADA TURNO PARA VER SI SE TERMINO LA PARTIDA
+                        cond = true;
+                    } else {
+                        turnoDe = !turnoDe; //SI LA PARTIDA NO TERMINO, CAMBIO EL TURNO A LA PC
+                    }
+                    System.out.println("Al jugador le quedan " + jugadorUnoFichas + " cubos");
+                    System.out.println("A la PC le quedan " + jugadorDosPC + " cubos");
+
+                }
             }
         }
-        //VAMOS A SUMAR UNA VICTORIA SI EL JUGADOR LE GANA A LA MAQUINA?
-    } 
-    
-    public void inteligenciaArtificial() {
-        Tablero tableroAux = this.partida.getTablero();
-        
-        
-        libroDeReglas.mejorJugadaPC(this.partida.getTablero());
+
+        //UNA VEZ QUE SE TERMINO LA PARTIDA, ACTUALIZO EL RANKING, ES DECIR LE SUMO UNA PARTIDA GANADA AL QUE GANO
+        //SI EMPATAN NO LE SUMO NADA A NADIE
+        this.partida.getTablero().dibujarTablero();
+        if (libroDeReglas.calcularPuntaje(1, this.partida.getTablero()) > libroDeReglas.calcularPuntaje(2, this.partida.getTablero())) {
+            int jGanados = this.partida.getJugadorUno().getJuegosGanados();
+            this.partida.getJugadorUno().setJuegosGanados(jGanados + 1);
+            System.out.println("Gano el jugador");
+            System.out.print("El puntaje del ganador fue: ");
+            System.out.println(libroDeReglas.calcularPuntaje(1, this.partida.getTablero()));
+        } else if (libroDeReglas.calcularPuntaje(1, this.partida.getTablero()) < libroDeReglas.calcularPuntaje(2, this.partida.getTablero())) {
+            System.out.println("Gano la PC");
+            System.out.print("El puntaje de la PC fue: ");
+            System.out.println(libroDeReglas.calcularPuntaje(2, this.partida.getTablero()));
+        } else {
+            System.out.println("El juego termino en empate");
+        }
+    }
+
+    public int inteligenciaArtificial(int fichasDisponibles) {                                 
+        fichasDisponibles=libroDeReglas.mejorJugadaPC(this.partida.getTablero(),fichasDisponibles); //METODO ENCARGADO DE TODO LO RELACIONADO CON EL JUEGO DE LA PC, DEVUELVE LAS FICHAS QUE QUEDARON LUEGO DEL MOVIMIENTO
+        return fichasDisponibles;
     }
 }

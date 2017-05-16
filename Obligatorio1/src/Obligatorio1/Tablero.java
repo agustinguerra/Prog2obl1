@@ -12,6 +12,27 @@ public class Tablero {
         return matriz;
     }
 
+    public Tablero copiarTablero() {
+        Tablero tabCopia = new Tablero();
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                tabCopia.getFicha(i, j).setValor(this.getFicha(i, j).getValor());
+                switch (this.getFicha(i, j).getColor()) {
+                    case Ficha.ANSI_BLUE:
+                        tabCopia.getFicha(i, j).setColor(2);
+                        break;
+                    case Ficha.ANSI_RED:
+                        tabCopia.getFicha(i, j).setColor(1);
+                        break;
+                    default:
+                        tabCopia.getFicha(i, j).setColor(0);
+                        break;
+                }
+            }
+        }
+        return tabCopia;
+    }
+
     public void setMatriz(Ficha[][] matriz) {
         this.matriz = matriz;
     }
