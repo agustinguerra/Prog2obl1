@@ -77,7 +77,7 @@ public class Tablero {
                 interfaz.imprimirEnPantalla("", "", 0, 1);
                 //System.out.println("");
             }
-            interfaz.imprimirEnPantalla("  -------------------------------", "", 0, 1);
+            interfaz.imprimirEnPantalla("   -----------------------------", "", 0, 1);
             //System.out.println("  -----------------------------");
             for (int column = 0; column < dimensiones; column++) {
                 if (column == 0) {
@@ -120,7 +120,7 @@ public class Tablero {
         }
         interfaz.imprimirEnPantalla("", "", 0, 1);
         //System.out.println("");
-        interfaz.imprimirEnPantalla("  -------------------------------", "", 0, 1);
+        interfaz.imprimirEnPantalla("   -----------------------------", "", 0, 1);
         //System.out.println("  -----------------------------");
     }
 
