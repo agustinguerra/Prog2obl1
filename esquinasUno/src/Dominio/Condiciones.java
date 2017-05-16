@@ -1,7 +1,8 @@
-package Obligatorio1;
+package Dominio;
 
 public class Condiciones {
 
+    //VARIABLES PRIVADAS DE LA CLASE CONDICIONES
     private boolean condArriba;
     private boolean condAbajo;
     private boolean condIzquierda;
@@ -17,6 +18,7 @@ public class Condiciones {
     private boolean condExternaTres;
     private boolean condExternaCuatro;
 
+    //METODOS DE ACCESO Y MODIFICACIONES DE LA CLASE CONDICIONES
     public boolean isCondArriba() {
         return condArriba;
     }
@@ -121,6 +123,7 @@ public class Condiciones {
         this.condExternaCuatro = condExternaCuatro;
     }
 
+    //CONSTRUCTOR SIN PARAMETROS DE LA CLASE CONDICIONES
     public Condiciones() {
         this.condArriba = false;
         this.condAbajo = false;
@@ -141,6 +144,7 @@ public class Condiciones {
         this.condExternaCuatro = false;
     }
 
+    //METODO QUE DEVULEVE TRUE O FALSE SI HAY FICHA DE VALOR 1 O MAS
     public boolean hayFicha(int i, int j, Tablero tablero) { //DEVUELVE TRUE SI HAY UNA FICHA EN EL TABLERO EN DETERMINADA POSICION
         boolean devolver = false;
         if (tablero.getFicha(i, j).getValor() > 0) {
@@ -149,6 +153,7 @@ public class Condiciones {
         return devolver;
     }
 
+    //METODO QUE CHEQUEA CONDICIONES EN GENERAL PARA METODOS DE REGLAS
     public void chequeadorCondiciones(int i, int j, Tablero tablero) {
         //ESTA CONDICION EVALUA SI ES INTERNO O EXTERNO
         this.condInternaDelTablero = ((i > 0 && j > 0) && (i < 5 && j < 5));

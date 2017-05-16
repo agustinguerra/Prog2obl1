@@ -1,4 +1,4 @@
-package Obligatorio1;
+package Dominio;
 
 public class Partida {
 

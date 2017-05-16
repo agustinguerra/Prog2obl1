@@ -1,4 +1,4 @@
-package Obligatorio1;
+package Dominio;
 
 public class Ficha {
 
@@ -12,6 +12,14 @@ public class Ficha {
     //METODOS DE ACCESO Y MODIFICACION DE LA CLASE FICHA
     public String getColor() {
         return color;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     //COLOR 0 NEGRO, COLOR 1 ROJO, COLOR 2 AZUl
@@ -29,14 +37,6 @@ public class Ficha {
             default:
                 break;
         }
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
     }
 
     //CONSTRUCTOR VACIO DE LA CLASE FICHA

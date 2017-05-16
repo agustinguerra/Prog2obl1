@@ -1,6 +1,7 @@
-package Obligatorio1;
+package Dominio;
 
-import static Obligatorio1.Interfaz.ANSI_RESET;
+import Interfaz.Interfaz;
+import static Interfaz.Interfaz.ANSI_RESET;
 
 public class Tablero {
 
@@ -63,46 +64,62 @@ public class Tablero {
 
     //ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA. NO ESTA DIBUJANDO LA ULTIMA LINEA, REVISAR LUEGO
     public void dibujarTablero() {
+        Interfaz interfaz = new Interfaz();
         int dimensiones = 6;
-        System.out.println("");
-        System.out.println("    1    2    3    4    5    6");
+        interfaz.imprimirEnPantalla("", "", 0, 1);
+        interfaz.imprimirEnPantalla("    1    2    3    4    5    6", "", 0, 1);
+        //System.out.println("");
+        //System.out.println("    1    2    3    4    5    6");
         for (int row = 0; row < dimensiones; row++) {
             if (row != 0) {
-                System.out.println("");
+                interfaz.imprimirEnPantalla("", "", 0, 1);
+                //System.out.println("");
             }
-            System.out.println("  -----------------------------");
+            interfaz.imprimirEnPantalla("  -----------------------------", "", 0, 1);
+            //System.out.println("  -----------------------------");
             for (int column = 0; column < dimensiones; column++) {
                 if (column == 0) {
                     switch (row) {
                         case 0:
-                            System.out.print("A");
+                            interfaz.imprimirEnPantalla("A", "", 0, 6);
+                            //System.out.print("A");
                             break;
                         case 1:
-                            System.out.print("B");
+                            interfaz.imprimirEnPantalla("B", "", 0, 6);
+                            //System.out.print("B");
                             break;
                         case 2:
-                            System.out.print("C");
+                            interfaz.imprimirEnPantalla("C", "", 0, 6);
+                            //System.out.print("C");
                             break;
                         case 3:
-                            System.out.print("D");
+                            interfaz.imprimirEnPantalla("D", "", 0, 6);
+                            //System.out.print("D");
                             break;
                         case 4:
-                            System.out.print("E");
+                            interfaz.imprimirEnPantalla("E", "", 0, 6);
+                            //System.out.print("E");
                             break;
                         case 5:
-                            System.out.print("F");
+                            interfaz.imprimirEnPantalla("F", "", 0, 6);
+                            //System.out.print("F");
                             break;
                     }
-                    System.out.print("| " + stringFicha((this.getFicha(row, column))) + " ");
+                    interfaz.imprimirEnPantalla(stringFicha((this.getFicha(row, column))),"", 0, 4);
+                    //System.out.print("| " + stringFicha((this.getFicha(row, column))) + " ");
                 } else {
-                    System.out.print(" | " + stringFicha((this.getFicha(row, column))) + " ");
+                    interfaz.imprimirEnPantalla(stringFicha((this.getFicha(row, column))),"", 0, 5);
+                    //System.out.print(" | " + stringFicha((this.getFicha(row, column))) + " ");
                 }
 
             }
-            System.out.print(" |");
+            interfaz.imprimirEnPantalla("", "", 0, 7);
+            //System.out.print(" |");
         }
-        System.out.println("");
-        System.out.println("  -----------------------------");
+        interfaz.imprimirEnPantalla("", "", 0, 1);
+        //System.out.println("");
+        interfaz.imprimirEnPantalla("  -----------------------------", "", 0, 1);
+        //System.out.println("  -----------------------------");
     }
 
     //CONSTRUCTOR VACIO DE LA CLASE TABLERO

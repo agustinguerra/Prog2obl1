@@ -1,5 +1,7 @@
-package Obligatorio1;
+package Program;
 
+import Dominio.Sistema;
+import Interfaz.Interfaz;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,18 +10,6 @@ public class Program {
     public static void main(String[] args) {
         Sistema sistema = new Sistema();
         Interfaz interfaz = new Interfaz(sistema);
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        jugador1.setAlias("Agus");
-        jugador1.setEdad(23);
-        jugador1.setJuegosGanados(0);
-        jugador1.setNombre("Agustin");
-        jugador2.setAlias("Juanchi");
-        jugador2.setEdad(25);
-        jugador2.setJuegosGanados(0);
-        jugador2.setNombre("Juancho");
-        sistema.getListaJugadores().add(jugador1);
-        sistema.getListaJugadores().add(jugador2);
         interfaz.menu();
     }
 
@@ -54,18 +44,19 @@ public class Program {
         }
         return x;
     }
-    
-    public static String pidoDatosParaMovimientoValido (String msg) {
+
+    //METODO ESTATICO QUE PIDE DATOS PARA MOVIMIENTO Y VALIDA
+    public static String pidoDatosParaMovimientoValido(String msg) {
         System.out.println(msg);
         String x = (new Scanner(System.in)).nextLine();
-        boolean cond;       
-        cond = x.equals("X")||(x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
-        while (!cond){           
+        boolean cond;
+        cond = x.equals("X") || (x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
+        while (!cond) {
             System.out.println(msg);
             x = (new Scanner(System.in)).nextLine();
             cond = (x.length() == 2 && x.charAt(0) >= 'A' && x.charAt(0) <= 'F' && (Character.getNumericValue(x.charAt(1)) >= 1 && Character.getNumericValue(x.charAt(1)) <= 6));
-            
+
         }
-        return x;        
+        return x;
     }
 }
