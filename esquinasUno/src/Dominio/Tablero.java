@@ -13,6 +13,7 @@ public class Tablero {
         return matriz;
     }
 
+    //METODO QUE COPIA EL TABLERO
     public Tablero copiarTablero() {
         Tablero tabCopia = new Tablero();
         for (int i = 0; i < 6; i++) {
@@ -34,6 +35,7 @@ public class Tablero {
         return tabCopia;
     }
 
+    //METODO DE MODIFICACION DE MATRIZ
     public void setMatriz(Ficha[][] matriz) {
         this.matriz = matriz;
     }
@@ -61,7 +63,7 @@ public class Tablero {
         }
         return fichaParaImprimir;
     }
-
+    
     //ESTE METODO DIBUJA TODO EL TABLERO Y LAS FICHAS. SI LA FICHA TIENE VALOR 0, ES DECIR NADIE PUSO FICHA, NO LA DIBUJA. NO ESTA DIBUJANDO LA ULTIMA LINEA, REVISAR LUEGO
     public void dibujarTablero() {
         Interfaz interfaz = new Interfaz();
@@ -75,7 +77,7 @@ public class Tablero {
                 interfaz.imprimirEnPantalla("", "", 0, 1);
                 //System.out.println("");
             }
-            interfaz.imprimirEnPantalla("  -----------------------------", "", 0, 1);
+            interfaz.imprimirEnPantalla("  -------------------------------", "", 0, 1);
             //System.out.println("  -----------------------------");
             for (int column = 0; column < dimensiones; column++) {
                 if (column == 0) {
@@ -118,7 +120,7 @@ public class Tablero {
         }
         interfaz.imprimirEnPantalla("", "", 0, 1);
         //System.out.println("");
-        interfaz.imprimirEnPantalla("  -----------------------------", "", 0, 1);
+        interfaz.imprimirEnPantalla("  -------------------------------", "", 0, 1);
         //System.out.println("  -----------------------------");
     }
 

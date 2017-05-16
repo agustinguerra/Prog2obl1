@@ -53,7 +53,7 @@ public class Interfaz {
                 System.out.println(y);
                 break;
             case 4:
-                System.out.print("| " + x + " ");
+                System.out.print(" " + x + " ");
                 break;
             case 5:
                 System.out.print(" | " + x + " ");

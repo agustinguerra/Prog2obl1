@@ -57,7 +57,7 @@ public class Jugador implements Comparable<Jugador> {
     //METODO TO STRING DE LA CLASE JUGADOR
     @Override
     public String toString() {
-        return "Alias = " + alias + ", " + "Nombre = " + nombre + ", Edad = " + edad + ", Juegos Ganados = " + juegosGanados;
+        return "Alias = " + alias + ", " + "Nombre = " + nombre + ", Edad = " + edad;
     }
 
     //METODO QUE ES USADO EN COLLECTIONS.SORT PARA ORDENAR LA LISTA DE JUGADORES POR JUEGOS GANADOS

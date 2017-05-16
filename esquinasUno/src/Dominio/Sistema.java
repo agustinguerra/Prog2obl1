@@ -49,8 +49,7 @@ public class Sistema {
         Jugador jugador = new Jugador();
         jugador.setEdad(pidoDatoIntPositivo("Ingrese la edad del jugador: ", 0, Integer.MAX_VALUE, 0));
         jugador.setNombre(pidoDatoString("Ingrese el nombre del jugador: ", ""));
-        jugador.setJuegosGanados(pidoDatoIntPositivo("Ingrese juegos ganados", 0, Integer.MAX_VALUE, 0));
-        //jugador.setJuegosGanados(0);
+        jugador.setJuegosGanados(0);
         jugador.setAlias(pidoDatoString("Ingrese el alias del jugador (DEBE SER UNICO, SE COMPROBARA EXISTENCIA REPETIDA). ", ""));
         for (int i = 0; i < listaJugadores.size(); i++) {
             if (jugador.getAlias().equals(listaJugadores.get(i).getAlias())) {
